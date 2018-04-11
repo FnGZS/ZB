@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">提现账户管理</h1>
+		</header>
+		  
+    <div class="ming" style="margin-top: 50px;">
+       <ul class="mui-table-view ">
+				<li class="mui-table-view-cell">  
+					<a href="#picture" class="mui-navigate-right caiwu">
+						<img src="images/jia.png">
+						<div style="color:#bfbfbf ;" class="wenzi-right">添加提现账户</div>
+					</a>
+				</li>
+			</ul>  
+    </div>
+    <div class="kahao-zong">
+        <div class="kahao" style="display: none;" id="kahao">
+    	    <div class="kahaotubiao">
+    		    <div class="kahaotubiao-left"><img src="images/zhifubao3.png"></div>
+    		    <div class="kahaotubiao-main">支付宝</div>
+    		    <div class="kahaotubiao-right" id="confirmBtn">删除</div>
+    		    <div class="dianhuayinhankahao" id="phone1">183***6023</div>
+    	    </div>   
+        </div>
+        
+         <div class="kahao1" style="display: none;" id="kahao1"> 
+    	    <div class="kahaotubiao">
+    		    <div class="kahaotubiao-left"><img src="images/jianshe.png"></div>
+    		    <div class="kahaotubiao-main">建设银行卡</div>
+    		    <div class="kahaotubiao-right" id="confirmBtn1">删除</div>
+    		    <div class="dianhuayinhankahao" id="phone2">3305 **** **** 1256</div>
+    	    </div>   
+        </div> 
+         
+    </div>
+    
+    
+    <div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="zengtianzhifubaozhanghao.html">添加新支付宝账号</a>
+				</li>
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="zengtianyinhangka.html">添加新银行卡卡号</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+	</div>
+		 
+	 <script type="text/javascript" src="js/castapp.js" ></script>
+
+		<script type="text/javascript" src="js/jquery.js" ></script> 
+	<script>
+		//监听a标签 
+		 
+		var request_url=localStorage.getItem('request_url');
+		var phone=localStorage.getItem('phone');
+		var phone1=document.getElementById('phone1')
+		var kahao=document.getElementById('kahao')
+		var kaohao1=document.getElementById('kahao1') 
+		var phone2=document.getElementById('phone2')
+		var btn1=document.getElementById('btn1')
+		var btn2=document.getElementById('btn2')
+		mui('body').on('tap','a',function(){document.location.href=this.href;});
+		 
+		
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+		});
+		var info = document.getElementById("info");
+		mui('body').on('tap', '.mui-popover-action li>a', function() {
+			var a = this,
+				parent;
+			//根据点击按钮，反推当前是哪个actionsheet
+			for (parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+				if (parent.classList.contains('mui-popover-action')) {
+					break;
+				}
+			}
+			//关闭actionsheet
+			mui('#' + parent.id).popover('toggle');
+//			info.innerHTML = "你刚点击了\"" + a.innerHTML + "\"按钮";
+		})
+		 
+			$.ajax({                   //初始化全部
+								type: "get",         //修改当前页面内容
+								url: request_url + "Add/chaxun",     
+								data: {         
+									phone_data:phone,
+								},                            
+								async: true,     
+								success: function(data) {   
+									 
+								      json = JSON.parse(data);   
+								               
+										 if (json.zhifubao) {
+										 	kahao.style.display='block'
+										 	phone1.innerHTML=json.zhifubao
+										 } 
+								    	  
+										  		 		  
+								               
+								      if(json.yinhangka){
+								      	kahao1.style.display='block' 
+								      	phone2.innerHTML=json.yinhangka 
+								      	//dic2.innerHTML='银行卡支付(' + json.yinhangka +' )'
+//								      	  dic.innerHTML= dic.innerHTML+'<div class=" mui-radio weizhi" style="background-color: #fff;height: 45px; margin-top: 5px;">'
+//														+       '   <font style="margin-left: 20px; color: #000000;">银行卡('+json.yinhangka+')</font>'
+//														+		 ' <input style="width: 17px;"   name="radio" type="radio" iid="2">'
+//														+'</div>' 
+														
+								      }
+								   
+								          
+									//ca.prompt('修改成功'); 
+									//mui.back()    
+			    	        } 
+	})
+			 
+			
+		 document.getElementById("confirmBtn").addEventListener('click', function() {    //支付宝删除
+				var btnArray = ['否', '是'];
+				
+				mui.confirm('是否删除本支付宝？', '提现账户', btnArray, function(e) {
+					if (e.index == 1) { 
+					    
+                        $.ajax({                      //上传修改的信息
+							type: "get",      
+							url: request_url + "Add/tixianshanchu1", 
+							data: {  
+								  phone_data:phone, 
+							},                      
+							async: true,      
+							success: function(data) {    
+							            
+								if (data==1) { 
+									 ca.prompt('删除成功')   
+								         	kahao.style.display='none'
+										//mui.back() 
+
+							}else{ 
+									ca.prompt('删除失败，请重试')  
+								}  
+							}   
+						});
+						  
+					} else { 
+                           ca.prompt('你取消了删除')     
+					}
+				})  
+			});
+			
+			
+			 document.getElementById("confirmBtn1").addEventListener('click', function() {   //银行卡删除
+				var btnArray = ['否', '是'];
+				
+				mui.confirm('是否删除本银行卡？', '提现账户', btnArray, function(e) {
+					if (e.index == 1) { 
+					    
+                        $.ajax({                      //上传修改的信息
+							type: "get",       
+							url: request_url + "Add/tixianshanchu2", 
+							data: {  
+								  phone_data:phone,
+							},                      
+							async: true,      
+							success: function(data) {    
+							           
+								if (data==1) { 
+									 ca.prompt('删除成功')  
+								         	kahao1.style.display='none'
+										//mui.back() 
+ 
+							}else{ 
+									ca.prompt('删除失败，请重试')  
+								}  
+							}   
+						});
+						  
+					} else { 
+                           ca.prompt('你取消了删除')     
+					}
+				})  
+			});
+	</script>	   
+	</body>
+
+</html>

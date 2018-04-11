@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script> 
+	</head>  
+   
+	<body> 
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">选择提现账户</h1>
+		</header>
+		
+    <div class="ming" style="margin-top: 50px;">
+       <ul class="mui-table-view "> 
+				<li class="mui-table-view-cell">  
+					<a href="#picture" class="mui-navigate-right caiwu">
+						<img src="images/jia.png">
+						<div style="color:#bfbfbf ;" class="wenzi-right">添加提现账户</div>
+					</a>
+				</li>
+			</ul>  
+    </div> 
+    <div class="kahao-zong cell"  >
+    	<div style="display:none" id="zhifubao">
+	        <div class=" mui-radio weizhi" style="background-color: #fff;height: 45px; margin-top: 5px;">
+			          <font style="margin-left: 20px; color: #000000;" id="dic1">支付宝支付(183***6023)</font>
+					  <input style="width: 17px;"   name="radio" type="radio"  class="radio1">
+			</div> 
+		</div>
+		<div style="display:none" id="yinhangka">
+			<div class=" mui-radio weizhi" style="background-color: #fff;height: 45px; margin-top: 5px;">
+			          <font style="margin-left: 20px; color: #000000;" id="dic2">银行卡支付(183***2345)</font>
+					  <input style="width: 17px;"   name="radio" type="radio"class="radio1">
+			</div>  
+		</div>
+		 
+         
+    </div> 
+     
+
+    <div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="zengtianzhifubaozhanghao.html">添加新支付宝账号</a>
+				</li>
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="zengtianyinhangka.html">添加新银行卡卡号</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view"> 
+				<li class="mui-table-view-cell" style="font-size: 13px;">
+					<a href="#picture"><b>取消</b></a>
+				</li> 
+			</ul> 
+	</div> 
+	
+	<script type="text/javascript" src="js/castapp.js" ></script>
+
+<script type="text/javascript" src="js/jquery.js" ></script>
+	  
+	<script>
+		dj.init(); 
+		var request_url = localStorage.getItem('request_url'); 
+	    var phone = localStorage.getItem('phone'); 
+	    var btn=document.getElementById('btn')
+	    var dic1=document.getElementById('dic1')
+	    var dic2=document.getElementById('dic2')
+	    var radio1=document.getElementsByClassName('radio1')
+	    var zhifubao=document.getElementById('zhifubao')
+	    var yinhangka=document.getElementById('yinhangka')
+	    var zhanghao
+		//监听a标签 
+		mui('body').on('tap','a',function(){document.location.href=this.href;});
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});  
+		mui.init({     
+			beforeback: function(){           //返回上级目录时刷新内容
+				
+				//获得列表界面的webview     
+				var i = plus.webview.getWebviewById('tixian'); 
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新 
+			
+				 if(i){
+				  
+		            //触发列表界面的自定义事件（refresh）,从而进行数据刷新
+		            i.evalJS("getUserInfo()");
+		      }  
+		        return true; 
+			}
+		});
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+		}); 
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+		});
+		var info = document.getElementById("info");
+		mui('body').on('tap', '.mui-popover-action li>a', function() {
+			
+			var a = this,
+			
+				parent;
+			//根据点击按钮，反推当前是哪个actionsheet
+			for (parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+				if (parent.classList.contains('mui-popover-action')) { 
+					break;
+					
+				}  
+			}
+			//关闭actionsheet
+			mui('#' + parent.id).popover('toggle');
+			
+//			info.innerHTML = "你刚点击了\"" + a.innerHTML + "\"按钮";
+            
+		})
+		  
+		$.ajax({                   //初始化全部
+								type: "get",         //修改当前页面内容
+								url: request_url + "Add/chaxun",     
+								data: {         
+									phone_data:phone,
+								   
+								  
+							 },                           
+								async: true,     
+								success: function(data) {       
+								      json = JSON.parse(data);   
+								      
+								      if (json.zhifubao) {
+								      	zhifubao.style.display='block' 
+								      	dic1.innerHTML='支付宝支付(' + json.zhifubao +' )'
+//								      	  dic.innerHTML=dic.innerHTML+'<div class=" mui-radio weizhi" style="background-color: #fff;height: 45px; margin-top: 5px;">'
+//														+       '   <font style="margin-left: 20px; color: #000000;">支付宝('+json.zhifubao+')</font>'
+//														+		 ' <input style="width: 17px;"   name="radio" type="radio" iid="1">'
+//														+'</div>' 
+												 		  
+								      }        
+								      if(json.yinhangka){
+								      	yinhangka.style.display='block' 
+								      	dic2.innerHTML='银行卡支付(' + json.yinhangka +' )'
+//								      	  dic.innerHTML= dic.innerHTML+'<div class=" mui-radio weizhi" style="background-color: #fff;height: 45px; margin-top: 5px;">'
+//														+       '   <font style="margin-left: 20px; color: #000000;">银行卡('+json.yinhangka+')</font>'
+//														+		 ' <input style="width: 17px;"   name="radio" type="radio" iid="2">'
+//														+'</div>' 
+														
+								      }
+								   
+								       
+									//ca.prompt('修改成功'); 
+									//mui.back()    
+			    	        } 
+	})
+		
+	
+	
+ radio1[0].addEventListener('click',function(){
+ 	zhanghao='zhifubao' 
+ 	localStorage.setItem('tixianzhanghao',zhanghao);     
+ })  
+ radio1[1].addEventListener('click',function(){
+ 	zhanghao='yinhangka'   
+ 	localStorage.setItem('tixianzhanghao',zhanghao);    
+ })  
+	</script>	   
+	</body>
+
+</html>

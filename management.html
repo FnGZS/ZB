@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title> 
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+	 
+	</head>
+
+	<body> 
+		     
+	<div class="beijin-baise1">      
+	  <div class="beijin1"> 
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="manag">资金管理</div>
+        </div>
+         <div class="zuorishouyi">昨日收益</div> 
+        <div class="money"><span>0</span></div>
+        <div class="jinge">  
+        	<div class="jinge1">
+        		<div class="jinge1-1">可提取金额(元)</div>
+        		<div class="jinge1-2"><span>0</span></div>
+        	</div>
+        	<div class="shutiao"></div>
+        	<div class="jinge2">
+        		<div class="jinge1-1">冻结金额(元)</div>
+        		<div class="jinge1-2"><span>0</span></div>
+        	</div>
+        </div>
+     </div> 
+    </div>
+     
+    
+    <div class="ming">
+       <ul class="mui-table-view ">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right caiwu">
+						<img src="images/caiwu.png">
+						<div class="wenzi-right">财务明细</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right caiwu">
+						<img src="images/dongjie.png">
+						<div class="wenzi-right">冻结明细</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right caiwu">
+						<img src="images/chongzhi.png">
+						<div class="wenzi-right">充值记录</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right caiwu">
+						<img src="images/tixian.png">
+						<div class="wenzi-right">提现记录</div>
+					</a>
+				</li>
+			</ul>  
+    </div>
+    <div class="ming">
+        <ul class="mui-table-view ">
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right caiwu" id="tixian">
+						<img src="images/guanli.png">
+						<div class="wenzi-right">提现账户管理</div>
+					</a>
+				</li>
+	    </ul>
+	</div>
+	
+	
+	<div class="zijing-dibu">
+		<div class="zijing-dibu-left" id="chongzhi">充值</div>
+		<div class="zijing-dibu-main"></div>
+		<div class="zijing-dibu-right" id="tx">提现</div>
+	</div>
+	 <script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script type="text/javascript" src="js/jquery.js" ></script> 
+	  
+	<script>
+		dj.init() 
+		var caiwu=document.getElementsByClassName('caiwu');
+		var tixian=document.getElementById('tixian');
+		var chongzhi=document.getElementById('chongzhi');
+		var tx=document.getElementById('tx');
+		var request_url=localStorage.getItem('request_url');
+		var phone=localStorage.getItem('phone');
+		var span=document.getElementsByTagName('span') 
+ 
+		
+		 $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone,  
+							},                   
+							async: true,   
+							success: function(data) {  
+								json = JSON.parse(data);  
+								span[0].innerHTML=json.shouyi 
+								span[1].innerHTML=json.tixian 
+								span[2].innerHTML=json.dongjie  
+													   
+								   
+							}                     
+			});      
+		caiwu['0'].addEventListener('tap',function(){           //财务明细
+			mui.openWindow({
+				url:'caiwumingxi.html',
+				id:'caiwumingxi'     
+			});
+		})
+		caiwu['1'].addEventListener('tap',function(){           //冻结明细
+			mui.openWindow({
+				url:'dongjiemingxi.html',
+				id:'dongjiemingxi'
+			}); 
+		})
+		caiwu['2'].addEventListener('tap',function(){            //充值记录
+			mui.openWindow({
+				url:'chongzhimingxi.html',
+				id:'chongzhimingxi'
+			});  
+		})  
+		caiwu['3'].addEventListener('tap',function(){           //提现记录
+			mui.openWindow({
+				url:'tixianmingxi.html', 
+				id:'tixianmingxi'
+			}); 
+		})
+		tixian.addEventListener('tap',function(){              //提现账户管理
+			mui.openWindow({
+				url:'tixianzhanghuguanli.html',
+				id:'tixianzhanghuguanli'
+			});
+		})
+		chongzhi.addEventListener('tap',function(){
+			mui.openWindow({
+				url:'chongzhi.html',
+				id:'chongzhi'
+			});
+		})
+		tx.addEventListener('tap',function(){
+			mui.openWindow({
+				url:'tixian.html',
+				id:'tixian'
+			});
+		})
+		
+		 
+		function getUserInfo(){ //放回此页面时刷新内容
+			  
+		   	 $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {     
+							    phone_data:phone, 
+							},                   
+							async: true,     
+							success: function(data) {     
+							     json = JSON.parse(data);   
+								span[0].innerHTML=json.shouyi
+								span[1].innerHTML=json.tixian 
+								span[2].innerHTML=json.dongjie  
+						  				 			  
+								  
+							}                  
+			});   
+		    
+		   } 
+	
+	</script>
+	</body>
+
+</html>

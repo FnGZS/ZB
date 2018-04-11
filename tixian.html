@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+ 
+	<body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">提现</h1>
+        </header>
+       <div class="tixian-zong">
+       	          <div class="tixian-dingbu" id="xuanzhe">
+       	  	         <div class="daozhang">到账账户</div>
+       	  	         <div class="zhifubaozhanghao" id="zhanghu">支付宝(**6023)</div>
+       	  	         <div class="tixian-jiantou"><img src="images/jiantou.png"></div>
+       	          </div>
+       	          <div class="xiahuaxian"></div>
+       	        <div>
+       	        <div class="tixianjinge">提现金额</div>
+                <div class="jinge">
+                	<div class="renmingbi">￥</div>
+                	<textarea  name="textarea" id="input1" ></textarea> 
+                </div>
+                  <div class="xiahuaxian"></div>
+                <div class="tixianjinge1">可提现余额￥<span id="span1">0.0</span></div>
+       </div>
+        <div style="margin-top: 20px;" class="zhifuanniu1" id="btn">提现</div>
+        
+         <script type="text/javascript" src="js/mui.js" ></script>
+
+<script type="text/javascript" src="js/mui.min.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+        	<script type="text/javascript" src="js/castapp.js" ></script>
+        <script>
+        	mui.init({     
+			beforeback: function(){           //返回上级目录时刷新内容
+				
+				//获得列表界面的webview     
+				var i = plus.webview.getWebviewById('management'); 
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新 
+			
+				 if(i){
+				  
+		            //触发列表界面的自定义事件（refresh）,从而进行数据刷新
+		            i.evalJS("getUserInfo()");
+		      }  
+		        return true; 
+			}
+		});
+        	var request_url = localStorage.getItem('request_url'); 
+	        var phone = localStorage.getItem('phone');  
+        	var xuanzhe=document.getElementById('xuanzhe');
+        	var zhanghu=document.getElementById('zhanghu')
+        	var span1=document.getElementById('span1')
+        	var input1=document.getElementById('input1')
+        	var btn=document.getElementById('btn')
+        	$.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone, 
+							},                   
+							async: true,   
+							success: function(data) {    
+							     json = JSON.parse(data);  
+							     zhanghu.innerHTML='支付宝(' + json.zhifubao + ')'
+							     span1.innerHTML=json.tixian
+								  
+								localStorage.setItem('gerenxinxi',data);    //本地存储个人信息
+							}                 
+			});  
+			
+        	xuanzhe.addEventListener('tap',function(){
+        		mui.openWindow({
+        			url:'tixianzhanghu.html',
+        		id:'tixianzhanghu'
+        		});	
+        	})
+        	
+        
+        	 btn.addEventListener('click',function(){  
+     	 	 if (parseInt(input1.value)<=parseInt(span1.innerHTML)) {
+     	 	 	var time = new Date();      // 程序计时的月从0开始取值后+1
+				var m = time.getMonth() + 1;
+				var c = time.getFullYear() + "-" + m + "-" 
+				     + time.getDate() + " " + time.getHours() + ":"
+				     + time.getMinutes() + ":" + time.getSeconds();
+		           
+	     	 	 	$.ajax({      
+								type: "get",         //修改当前页面内容
+								url: request_url + "Add/tixian", 
+								data: {    
+								    phone_data:phone, 
+								    input1_data:input1.value,  
+								    time_data:c,   
+							        tujing_data:zhanghu.innerHTML.substr(0, 3)
+								},                       
+								async: true,     
+								success: function(data) {    
+								    // json = JSON.parse(data);  
+								    if (data==1) {
+								    	 ca.prompt('提现成功') 
+								    	   mui.back()   
+								    } else{     
+								    	 ca.prompt('提现失败，请重试')
+								    } 
+								       
+//								    alert(data) 
+									   //span1.innerHTML=json.tixian 
+									//localStorage.setItem('gerenxinxi',data);  
+								}                 
+				});  
+      	 	 }else{
+      	 	 	ca.prompt('账户可提现金额不足')
+      	 	 } 
+        	 	
+        	 	 
+        	 })
+        	 
+        	 
+        	function getUserInfo(){ //放回此页面时刷新内容
+        	var	 tixianzhanghao=localStorage.getItem('tixianzhanghao');
+        		
+		   	 $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone, 
+							},                   
+							async: true,   
+							success: function(data) {    
+							     json = JSON.parse(data);  
+							     
+							     if (tixianzhanghao=='zhifubao') {
+							     	zhanghu.innerHTML='支付宝(' + json.zhifubao + ')'
+							     }else if(tixianzhanghao=='yinhangka'){
+							     	zhanghu.innerHTML='银行卡('+json.yinhangka+')'
+							     }  
+								   span1.innerHTML=json.tixian 
+								localStorage.setItem('gerenxinxi',data);   // 本地存储个人信息
+							}                  
+			});   
+		    
+		   }
+        </script>
+	</body>
+
+</html>

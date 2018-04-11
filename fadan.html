@@ -1,0 +1,541 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style3.css" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<link href="css/mui.picker.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.5&key=cf07f69f7cc1c600fd721a719a5888b3&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript"> 
+			mui.init()
+		</script>
+		<style>
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px; 
+				margin: 3px;
+			}  
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+	<div id="container" style="visibility: hidden;width: 1px;height: 1px;"></div>   
+	<div class="beijin-baise2"  style="height: 130px;background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);">  
+	  <div class="beijin1">
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="manag1">发单</div>       
+        </div> 
+        <div class="fadan" style="height: 240px;">
+        	    <div style="clear: both;" class="mui-input-row daxiao">
+					<label>寄件信息</label>
+					<input id="dd" style="width: 70%;"  type="text" placeholder="请输入寄件人地址">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>寄件电话</label>
+					<input id="dd" style="width: 70%;"  type="text" placeholder="请输入寄件人电话">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>详细地址</label>
+					<input style="width: 70%;"  type="text" placeholder="请输入详细地址">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>收件信息</label>
+					<input id="ss" style="width: 70%;"  type="text" placeholder="请输入收件人地址和电话">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>收件电话</label>
+					<input style="width: 70%;"  type="text" placeholder="请输入收件人电话">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>详细地址</label>
+					<input style="width: 70%;"  type="text" placeholder="请输入详细地址">
+				</div>
+        </div>
+        
+        <div class="fadan" style="margin-top: 10px;height: 125px;">
+	        	<div class="mui-input-row daxiao">
+					<label  >物品类型</label>
+					<input id="showUserPicker" style="width: 60%;float: left;"   type="text" placeholder="请选择物品类型">
+					<img src="images/jiantou.png">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>备注留言</label>
+					<input style="width: 70%;" type="text" placeholder="补充您的订单信息及要求">
+				</div>
+				<div class="fadanhengxian"></div>
+				<div style="clear: both;" class="mui-input-row daxiao">
+					<label>要求时间</label>
+					<input id="showUserPicker1" style="width: 70%;" type="text" placeholder="请输入要求时间">
+				</div>
+        </div>
+       
+        <div class="jiajian">
+            <div class="jian" id="jian">-</div>
+            <div class="kong" id="neirong">预估1公斤以下</div>
+       	    <div class="jia" id="jia">+</div> 	  
+        </div> 
+       <!-- <button  style="width: 100%;height: 20px;"></button>-->
+        <div class="ss"  id="gg">   
+	        <div class="mui-switch mui-switch-blue mui-switch-mini"   style="width: 180px;background-color: #fff; border: #FFF;">
+	        	<font class="wenzi-left"  >不限工具</font> 
+	        	  
+			<div class="mui-switch-handle" style="width: 80px; filter:alpha(opacity=50);opacity:0.5;"></div>
+	            <font style="font-size: 13px;float: right;margin-right: 15px;margin-top: 3px;">汽车配送</font>
+			</div> 
+        </div> 
+        
+        <div class="fadan" style="margin-top: 10px;height: 160px;">
+	        	<div class="mui-input-row daxiao" style="height: 40px;"> 
+	        		<img style="float: left; margin-left: 10px; " src="images/caiwu.png">
+					<div class="we">赏金</div>
+					
+					<img src="images/bangzhu.png">
+					<font ><span>10</span>元</font>
+					<div class="fadanhengxian"></div>
+				</div>  
+				<div class="mui-input-row daxiao">
+					<img style="float: left; margin-left: 10px; " src="images/caiwu.png">
+					<div class="we">追加赏金</div> 
+				    <font style="margin-right: 10%;" ><span id="showUserPicker4" >0</span>元</font>
+		 		</div>   
+				<div class="fadanhengxian"></div>
+				<div class="mui-input-row daxiao" style="height: 40px;clear: both;"> 
+	        		<img style="float: left; margin-left: 10px; " src="images/caiwu.png">
+					<div class="we">抵押金</div>
+					<font style="margin-right: 10%;" ><span>10</span>元</font>  
+				</div>     
+				<div class="fadanhengxian"></div>
+				<div class="mui-input-row daxiao" style="clear: both;">
+					<img style="float: left; margin-left: 10px;" src="images/youhuiquan.png">
+					<div class="we">优惠券</div>
+					
+					<img src="images/jiantou.png">
+					<font style="color: deepskyblue;">暂无可用优惠券</font>
+				</div>
+       </div>
+       <div class="fadananniu" id="zhifu">去支付</div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/castapp.js" ></script>
+ 
+<script type="text/javascript" src="js/jquery.js" ></script>
+        <script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+     <script>
+     	dj.init();
+     	//       联级 
+      (function($, doc) {
+				$.init();
+				$.ready(function() {
+					var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: 'ywj',
+						text: '小件物流'
+					}, {
+						value: 'aaa',
+						text: '大宗物流'
+					}, {
+						value: 'lj',
+						text: '外卖'
+					}]);
+					var showUserPickerButton = doc.getElementById('showUserPicker');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							showUserPickerButton.value =items[0].text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+					     
+					
+					
+					
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton = doc.getElementById('dd');
+					var cityResult3 = doc.getElementById('cityResult3');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							showCityPickerButton.value =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+				
+			})(mui, document);
+     	  	//       联级
+      (function($, doc) {
+				$.init();
+				$.ready(function() {
+					var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: 'ywj',
+						text: '1'
+					}, { 
+						value: 'aaa',
+						text: '2'
+					}, {
+						value: 'lj', 
+						text: '3'     
+					}]); 
+					var showUserPickerButton1 = doc.getElementById('showUserPicker1');
+					showUserPickerButton1.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							showUserPickerButton1.value =items[0].text+'小时';
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+					 
+					 
+					 var userPicker4 = new $.PopPicker();
+					userPicker4.setData([{
+						value: 'ywj',
+						text: '1'
+					}, {  
+						value: 'aaa',
+						text: '2'
+					}, {
+						value: 'lj', 
+						text: '3'     
+					}, {
+						value: 'lj', 
+						text: '4'     
+					}, {
+						value: 'lj', 
+						text: '5'     
+					}, { 
+						value: 'lj', 
+						text: '6'      
+					}]); 
+					var showUserPickerButton4 = doc.getElementById('showUserPicker4');
+					showUserPickerButton4.addEventListener('tap', function(event) {
+						userPicker4.show(function(items) {   
+							showUserPickerButton4.innerHTML =   items[0].text ;
+							//返回 false 可以阻止选择框的关闭 
+							//return false; 
+						});
+					}, false);  
+					
+					
+					 
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton1 = doc.getElementById('ss');
+					showCityPickerButton1.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							showCityPickerButton1.value = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+				
+			})(mui, document);
+     	
+
+
+     	
+     	var i=0;
+     	var request_url = localStorage.getItem('request_url'); 
+	    var phone = localStorage.getItem('phone'); 
+         var jian=document.getElementById('jian');
+         var neirong=document.getElementById('neirong');
+         var span1=document.getElementsByTagName('span')
+         var jia=document.getElementById('jia');
+         var zhifu=document.getElementById('zhifu');
+         var input1=document.getElementsByTagName('input')
+         var gg=document.getElementById('gg')
+         var pp=document.getElementById('pp')
+         var c=1; 
+         var gongju;
+       
+         gg.addEventListener('tap',function(){
+         	c=-c;
+           if (c==-1) {
+           	 gongju='汽车配送'
+           } else{
+            gongju='不限工具' 
+           }
+         
+         })
+         
+       
+         
+         jian.addEventListener('tap',function(){
+         	i--;
+         	if(i<0){
+         		i=0;
+         	}
+         	neirong.innerHTML='预估'+i+'公斤以下';
+         	 	
+         })
+         jia.addEventListener('tap',function(){
+         	++i;
+         	neirong.innerHTML='预估'+i+'公斤以下';	 	
+         })
+      
+         zhifu.addEventListener('tap',function(){ 
+            	var time = new Date();      // 程序计时的月从0开始取值后+1
+				var m = time.getMonth() + 1;
+				var c = time.getFullYear() + "-" + m + "-" 
+				     + time.getDate() + " " + time.getHours() + ":"
+				     + time.getMinutes() + ":" + time.getSeconds();
+			   
+         	    $.ajax({                   //初始化全部
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/fadan",     
+							data: {         
+								phone_data:phone,  
+							    time_data:c, 
+							    input0_data:input1[0].value+input1[2].value,    //寄件人地址
+							    input1_data:input1[1].value,    //寄件人手机号码
+//							    input2_data:input1[2].value,    //寄件人地址（省略）
+							    input3_data:input1[3].value+input1[5].value,    //收件人地址
+							    input4_data:input1[4].value,    //收件人电话
+//							    input5_data:input1[5].value,    //收件人地址（省略）
+							    input6_data:input1[6].value,    //物品类型
+							    input7_data:input1[7].value,    //备注留言
+							    input8_data:input1[8].value,    //要求时间 
+                                input8_data:i,                  //预计重量
+                                gongju_data:gongju,             //配送工具
+                                span0_data:span[0].innerHTML,    //赏金
+                                span1_data:span[1].innerHTML,    //追加赏金
+                                span2_data:span[2].innerHTML,    //抵押金  
+						 },                           
+							async: true,      
+							success: function(data) {   
+								   alert(data)
+//								ca.prompt('充值成功'); 
+//								mui.back() 
+		    	       }  
+              })   
+//       	mui.openWindow({
+//       		url:'zhifu.html',
+//       		id:'zhifu'
+//       	}); 
+    })  
+
+ 
+ //地址转经纬度代码  
+   var map = new AMap.Map("container", {
+        resizeEnable: true  ,
+        zoom: 15
+   });  
+    var dizhi1;
+    var dizhi2;
+    var d1;
+    var d2;
+    var d3;
+    var d4;
+     input1[0].addEventListener('change',function(){
+   	   dizhi1=input1[0].value+input1[2].value
+   	   if ( input1[0].value && input1[2].value) {
+   	   	   geocoder(dizhi1) 
+   	   }
+ 	   
+ 	  
+   })  
+    
+   input1[2].addEventListener('change',function(){
+   	   dizhi1=input1[0].value+input1[2].value
+ 	   if ( input1[0].value && input1[2].value) {
+   	   	   geocoder(dizhi1) 
+   	   }
+ 	  
+ 	   
+   }) 
+   input1[3].addEventListener('change',function(){
+   	   dizhi2=input1[3].value+input1[5].value
+ 	   if ( input1[3].value && input1[5].value) {
+   	   	   geocoder1(dizhi2) 
+   	   }
+ 	  
+ 	    
+   })  
+   input1[5].addEventListener('change',function(){
+   	 
+   	   dizhi2=input1[3].value+input1[5].value
+ 	   if ( input1[3].value && input1[5].value) {
+   	   	   geocoder1(dizhi2) 
+   	  } 
+ 	   
+ 	   
+   }) 
+    function geocoder(data) {
+        var geocoder = new AMap.Geocoder({
+           
+            radius: 1000 //范围，默认：500
+        });  
+      
+        //地理编码,返回地理编码结果
+        geocoder.getLocation(data, function(status, result) {
+            if (status === 'complete' && result.info === 'OK') {
+                geocoder_CallBack(result);
+            }
+        }); 
+    }
+    function addMarker(i, d) {
+    	
+        var marker = new AMap.Marker({
+            map: map,
+            position: [ d.location.getLng(),  d.location.getLat()]
+        });
+        var infoWindow = new AMap.InfoWindow({
+            content: d.formattedAddress,
+            offset: {x: 0, y: -30}
+        });
+        marker.on("mouseover", function(e) {
+            infoWindow.open(map, marker.getPosition());
+        }); 
+    }
+    //地理编码返回结果展示
+    function geocoder_CallBack(data) {
+    	
+        var resultStr = "";
+        //地理编码结果数组
+        var geocode = data.geocodes;
+        for (var i = 0; i < geocode.length; i++) { 
+            //拼接输出html  
+           addMarker(i, geocode[i]);  
+          //alert(geocode[i].location.getLng() + ", " + geocode[i].location.getLat() )
+          d1=geocode[i].location.getLng()
+          d2=geocode[i].location.getLat()
+        }   
+         if (d1 && d2 && d3 && d4) {
+         	jisuanjilu()
+         }
+        map.setFitView();
+       // document.getElementById("result").innerHTML = resultStr;
+     
+    }
+    
+    
+    //计算收件人地理坐标
+     function geocoder1(data) {
+        var geocoder = new AMap.Geocoder({
+           
+            radius: 1000 //范围，默认：500
+        });  
+      
+        //地理编码,返回地理编码结果
+        geocoder.getLocation(data, function(status, result) {
+            if (status === 'complete' && result.info === 'OK') {
+                geocoder_CallBack1(result);
+            }
+        }); 
+    } 
+    function addMarker1(i, d) {
+    	
+        var marker = new AMap.Marker({
+            map: map,
+            position: [ d.location.getLng(),  d.location.getLat()]
+        });
+        var infoWindow = new AMap.InfoWindow({
+            content: d.formattedAddress,
+            offset: {x: 0, y: -30}
+        });
+        marker.on("mouseover", function(e) {
+            infoWindow.open(map, marker.getPosition());
+        }); 
+    }
+    //地理编码返回结果展示
+    function geocoder_CallBack1(data) {
+    	
+        var resultStr = "";
+        //地理编码结果数组 
+        var geocode = data.geocodes;
+        for (var i = 0; i < geocode.length; i++) { 
+            //拼接输出html   
+           addMarker1(i, geocode[i]);  
+       // alert(geocode[i].location.getLng() + ", " + geocode[i].location.getLat() )
+          d3=geocode[i].location.getLng()
+          d4=geocode[i].location.getLat()
+        }   
+         if (d1 && d2 && d3 && d4) {
+         	jisuanjilu()
+         } 
+        map.setFitView();
+       // document.getElementById("result").innerHTML = resultStr;
+     
+    }
+     
+     
+     //计算距离
+      function  jisuanjilu(){
+      	
+      	lnglat1 = new AMap.LngLat(d1,d2)
+        lnglat2 =  new AMap.LngLat(d3,d4) 
+    new AMap.Marker({
+        map: map, 
+        position: lnglat1
+    });
+    new AMap.Marker({
+        map: map,  
+        position:lnglat2
+    });
+	new AMap.Polyline({ 
+   		map:map,
+      	strokeColor:'red',
+       path:[lnglat1,lnglat2]
+    }) 
+    
+    new AMap.Text({
+      	text:'两点相距'+Math.round(lnglat1.distance(lnglat2))+'米',
+        position:lnglat1.divideBy(2).add(lnglat2.divideBy(2)),
+        map:map,
+      	style:{'background-color':'#ccccff',
+				'border-color':'green',
+				'font-size':'12px'}
+    })  
+    console.log(lnglat1)
+    console.log(lnglat2)
+   alert(Math.round(lnglat1.distance(lnglat2)))
+    map.setFitView();
+      
+      }
+   
+    
+     </script>
+    
+	</body> 
+
+</html>

@@ -1,0 +1,124 @@
+.sese{
+	background-image: linear-gradient(120deg, #f6d365 50%, #fda085 100%);
+}
+.fadan{
+	/*border: red solid 1px;*/
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	height: 85px;
+	background-color: #fff;
+}
+.fadanhengxian{
+	float: right;
+	height: 1px;
+	width: 96%;
+	background-color: #e6e6e6;
+}
+.daxiao{
+	font-size: 13px;
+}
+.daxiao font{
+	margin-top: 10px;
+	float: right;
+	margin-right: 2%;
+	color: red;
+}
+.daxiao img{
+	margin-right: 10px;
+	margin-top: 10px;
+	height: 20px;
+	widows: 20px;
+	float: right;
+}
+.daxiao label{
+	/*border: red solid 1px;*/
+	width: 30%;
+}
+.daxiao input{
+	font-size: 13px;
+}
+.jiajian{
+	width: 100%;
+	margin: auto;
+	margin-top: 5px;
+	/*border: red solid 1px;*/
+	height: 50px;
+	display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.jia{
+	background-color: #fff;
+	margin-top: 10px;
+	padding-top: 1%;
+	font-size: 20px;
+	text-align: center;
+	width: 30px;
+	/*border: red solid 1px;*/
+	height: 30px;
+	border-radius: 15px;
+	color: #bfbfbf;
+}
+.jian{
+	background-color: #fff;
+	margin-top: 10px;
+	padding-top: 1%;
+	font-size: 20px;
+	text-align: center;
+	width: 30px;
+	/*border: red solid 1px;*/
+	height: 30px;
+	border-radius: 15px;
+	color: #bfbfbf;
+}
+.kong{
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #fff;
+	margin-top: 10px;
+	padding-top: 4px;
+	font-size: 20px;
+	text-align: center;
+	width: 100px;
+	/*border: red solid 1px;*/
+	height: 30px;
+	border-radius: 15px;
+	color: #bfbfbf;
+	font-size: 12px;
+}
+.we{
+	padding-top: 3px;
+	height: 30px;
+	width: 18%;
+	/*border: red solid 1px;*/
+	float: left; 
+	margin-top: 6px;
+}
+.fadananniu{
+	/*border: red solid 1px;*/
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	height: 50px;
+	background-color: #fff;
+	border-radius:30px ;
+	text-align: center;
+	padding-top: 15px;
+	color: #fff;
+	background-image: linear-gradient(to left, #fa709a 0%, #fee140 100%);
+}
+.wenzi-left{
+	margin-left: 10px;
+	margin-top: 3px;
+	float: left;
+	font-size: 13px;
+}
+.ss{
+	margin-top: 3px;
+	display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+}

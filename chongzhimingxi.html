@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />	
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+ 
+	<body style="background-color: #FFF">
+	<div class="beijin-baise2">
+	  <div class="beijin1"> 
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="manag1">充值记录</div>
+            <div class="caiwu1" ><img src="images/chaxun.png" id="ee"></div>
+        </div>
+         <div  class="tanchucaidan1" id="tc">
+        	<div class="caiwu-riqi1">日期</div>
+        	<div class="caiwu-riqi2">
+        		<div class="caiwu-riqi2-left riqi">今天</div>
+        		<div class="caiwu-riqi2-main riqi">近7天</div>
+        		<div class="caiwu-riqi2-right riqi">近1月</div>
+        	</div>
+        	<div class="caiwuhuaxian"></div>
+        	<div class="caiwu-leixing">
+        	    <div class="caiwu-anniu">
+        	    	<div class="qingkong" id="qing">清空</div>
+        	    	<div class="queren" id="btn">确认</div>
+        	    </div>       	    
+        	</div>
+        </div>
+         <div class="zuorishouyi">昨日收益</div>
+        <div class="money" id="shouyi"> 0</div>
+
+      </div>
+    </div>
+<!--遮罩-->		
+    <div id="fanhui" class=" mui-backdrop" style=" position: absolute; z-index: 999;  display: none; margin-top: 180px;"></div>
+<!--正文内容--> 
+    <div id="dic"> 
+        <!--<div class="caiwumingxi-neirong" >
+            <div class="caiwumingxi-neirong-left">
+                                          充值-充值额度以转入账户中<br>
+              2018-02-09 17:49:39                            
+            </div>
+            <div class="caiwumingxi-neirong-right">
+               +30.0
+            </div> 
+            
+        </div>
+        <div class="caiwumingxi-neirong-huaxian"></div>-->
+       
+    </div>
+<!--js-->      
+<script type="text/javascript" src="js/mui.js" ></script>
+<script type="text/javascript" src="js/castapp.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+    <script>
+    	dj.init();
+    	var i=0;
+    	var ee=document.getElementById('ee');
+    	var riqi=document.getElementsByClassName('riqi');
+    	var qing=document.getElementById('qing');
+    	var tc=document.getElementById('tc');
+    	var fanhui=document.getElementById('fanhui');
+    	var phone=localStorage.getItem('phone');
+		var request_url=localStorage.getItem('request_url');
+    	var dic=document.getElementById('dic')
+    	var bt=document.getElementById('btn')
+    	var shouyi=document.getElementById('shouyi')
+    	var json1
+    	var z=0 
+    	 $.ajax({                               //周日收益
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone, 
+							},                   
+							async: true,   
+							success: function(data) {    
+							     json = JSON.parse(data);  
+								shouyi.innerHTML=json.shouyi
+								  
+							}                 
+			});  
+    	$.ajax({      
+							type: "get",         //修改当前页面内容 
+							url: request_url + "Add/chongzhijilu", 
+							data: {    
+							    phone_data:phone, 
+							},                    
+							async: true,   
+							success: function(data) {    
+								 
+							    json  = JSON.parse(data);  
+							    json1=json
+								 for(  a in json)       { 
+									  var tmpl ='<div class="caiwumingxi-neirong" >'
+										        +  '  <div class="caiwumingxi-neirong-left">'
+										        +                                  '充值-从'+json[a].tujing+'转入账户中<br>'
+										        +     json[a].time                            
+										        +    '</div>' 
+										        +    '<div class="caiwumingxi-neirong-right">'
+										        +    '+'  +json[a].jine
+										        +   ' </div> ' 
+										        + '</div> '  
+							  			        + ' <div class="caiwumingxi-neirong-huaxian"></div>'
+			    	  	  	dic.innerHTML += tmpl; 
+								}
+								
+							}                   
+			});     
+		
+     ee.addEventListener('click',function(){      //顶部右侧图标开关
+        	 if(i==0) 
+        	 { 
+        	  tc.style.display='block';
+        	  fanhui.style.display='block'; 
+        	  i=1;
+ 	         }
+        	 else if(i==1)
+        	 {
+        	  tc.style.display='none';
+        	  fanhui.style.display='none';	
+        	  i=0; 
+        	 }
+//      	  console.log(i);
+        })
+    	fanhui.addEventListener('tap',function(){
+        	tc.style.display='none'
+        	fanhui.style.display='none'
+        })
+       riqi['0'].addEventListener('tap',function(){
+           riqi['0'].style.color='dodgerblue';
+       	   riqi['0'].style.border='dodgerblue solid 1px';
+       	   riqi['1'].style.color='#000';
+       	   riqi['1'].style.border='#E6E6E6 solid 1px';
+       	   riqi['2'].style.color='#000';
+       	   riqi['2'].style.border='#E6E6E6 solid 1px';
+       	   z=0;
+       	   
+       	   
+//     	   alert('选择了今天')
+       })
+       riqi['1'].addEventListener('tap',function(){
+           riqi['1'].style.color='dodgerblue';
+       	   riqi['1'].style.border='dodgerblue solid 1px';
+       	   riqi['0'].style.color='#000';
+       	   riqi['0'].style.border='#E6E6E6 solid 1px';
+       	   riqi['2'].style.color='#000';
+       	   riqi['2'].style.border='#E6E6E6 solid 1px';
+       	   z=1;
+//     	    alert('选择了近7天')
+ 
+       }) 
+       riqi['2'].addEventListener('tap',function(){
+       	   riqi['2'].style.color='dodgerblue';
+       	   riqi['2'].style.border='dodgerblue solid 1px';
+       	   riqi['1'].style.color='#000';
+       	   riqi['1'].style.border='#E6E6E6 solid 1px';
+       	   riqi['0'].style.color='#000';
+       	   riqi['0'].style.border='#E6E6E6 solid 1px';
+       	   z=2;
+//     	   alert('选择了近1月')
+       }) 
+      
+       qing.addEventListener('tap',function(){
+       	   riqi['0'].style.color='dodgerblue';
+       	   riqi['0'].style.border='dodgerblue solid 1px';
+       	   riqi['1'].style.color='#000';
+       	   riqi['1'].style.border='#E6E6E6 solid 1px';
+       	   riqi['2'].style.color='#000';    
+       	   riqi['2'].style.border='#E6E6E6 solid 1px';   
+       	    
+       	   	dic.innerHTML=''
+								 for(  a in json1)       {  
+								 	
+							                    var tmpl ='<div class="caiwumingxi-neirong" >'
+										        +  '  <div class="caiwumingxi-neirong-left">'
+										        +                                  '充值-从'+json1[a].tujing+'转入账户中<br>'
+										        +     json1[a].time                            
+										        +    '</div>' 
+										        +    '<div class="caiwumingxi-neirong-right">'
+										        +    '+'  +json1[a].jine
+										        +   ' </div> ' 
+										        + '</div> '  
+							  			        + ' <div class="caiwumingxi-neirong-huaxian"></div>'
+			    	  	  					dic.innerHTML += tmpl;   
+								 	
+				}
+       	    
+       })
+        var time = new Date();      // 程序计时的月从0开始取值后+1
+	    var m = time.getMonth() + 1;
+	    var c = time.getFullYear() + "-" + m + "-"
+	 			 + time.getDate() + " " + time.getHours() + ":"
+				+ time.getMinutes() + ":" + time.getSeconds();
+        
+     btn.addEventListener('click',function(){
+     	   if (z==0) {
+     	   	      	dic.innerHTML=''
+								 for(  a in json1)       {  
+								 	if (GetDateDiff(json1[a].time,c,"day")==0) {
+							                    var tmpl ='<div class="caiwumingxi-neirong" >'
+										        +  '  <div class="caiwumingxi-neirong-left">'
+										        +                                  '充值-从'+json1[a].tujing+'转入账户中<br>'
+										        +     json1[a].time                            
+										        +    '</div>' 
+										        +    '<div class="caiwumingxi-neirong-right">'
+										        +    '+'  +json1[a].jine
+										        +   ' </div> ' 
+										        + '</div> '  
+							  			        + ' <div class="caiwumingxi-neirong-huaxian"></div>'
+			    	  	  					dic.innerHTML += tmpl;   
+								 	}
+				}
+     	   } else if(z==1){
+     	   	dic.innerHTML=''
+     	   						for(  a in json1)       {  
+								 	//GetDateDiff(json1[a].time,c,"day");  
+								 	if (GetDateDiff(json1[a].time,c,"day")>=0 && GetDateDiff(json1[a].time,c,"day")<=7) {
+							                    var tmpl ='<div class="caiwumingxi-neirong" >'
+										        +  '  <div class="caiwumingxi-neirong-left">'
+										        +                                  '充值-从'+json1[a].tujing+'转入账户中<br>'
+										        +     json1[a].time                            
+										        +    '</div>' 
+										        +    '<div class="caiwumingxi-neirong-right">'
+										        +    '+'  +json1[a].jine
+										        +   ' </div> ' 
+										        + '</div> '  
+							  			        + ' <div class="caiwumingxi-neirong-huaxian"></div>'
+			    	  	  					dic.innerHTML += tmpl;   
+								 	}
+				}
+     	   }else{ 
+     	   	dic.innerHTML='' 
+     	   	  for(  a in json1){
+								var tmpl ='<div class="caiwumingxi-neirong" >'
+						        +  '  <div class="caiwumingxi-neirong-left">'
+						        +                                  '充值-从'+json1[a].tujing+'转入账户中<br>'
+						        +     json1[a].time                            
+						        +    '</div>' 
+						        +    '<div class="caiwumingxi-neirong-right">'
+						        +    '+'  +json1[a].jine
+						        +   ' </div> ' 
+						        + '</div> '  
+			  			        + ' <div class="caiwumingxi-neirong-huaxian"></div>'
+	  	  					dic.innerHTML += tmpl;   
+						}
+     	   }
+     })
+      
+      
+     
+    function GetDateDiff(startTime, endTime, diffType) {
+    //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式 
+    startTime = startTime.replace(/\-/g, "/");
+    endTime = endTime.replace(/\-/g, "/");
+    //将计算间隔类性字符转换为小写
+    diffType = diffType.toLowerCase();
+    var sTime =new Date(startTime); //开始时间
+    var eTime =new Date(endTime); //结束时间
+    //作为除数的数字
+    var timeType =1;
+    switch (diffType) {
+        case"second":
+            timeType =1000;
+        break;
+        case"minute":
+            timeType =1000*60;
+        break;
+        case"hour":
+            timeType =1000*3600;
+        break;
+        case"day":
+            timeType =1000*3600*24;
+        break;
+        default:
+        break;
+    }
+    return parseInt((eTime.getTime() - sTime.getTime()) / parseInt(timeType));
+}
+    </script>
+    
+	</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/style2.css" />
+		<script src="js/mui.min.js">
+		</script>
+	</head>
+
+	<body>
+
+		<div class="mui-content1 mui-fullscreen">
+			<div class="login-a">
+				<img src="images/fengniaokeji.png" />
+			</div>
+			<div class="login-b" style="filter:alpha(Opacity=60);-moz-opacity:0.8;opacity: 0.8 ">
+				<div class="login-b-b">
+					<!--<div class="login-b-b-left">账号</div>-->
+					<div class="login-b-b-right">
+						<input type="text" placeholder="请输入你的手机号" />
+						<button class="yzm" id="send_code">获取验证码</button>
+					</div>
+
+				</div>
+				<div class="login-b-b">
+					<!--<div class="login-b-b-left">验证码</div>-->
+					<div class="login-b-b-right">
+						<input type="text" placeholder="请输入你的验证码" />
+					</div>
+				</div>
+				<div class="login-b-b">
+					<!--<div class="login-b-b-left">密码</div>-->
+					<div class="login-b-b-right">
+						<input type="password" placeholder="请输入你的密码" />
+					</div>
+				</div>
+			</div>
+			<div class="btn" <!--style="height: 400px;-->">
+				<button style="background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);" id="btn">注册</button>
+				<p>
+					<a id="denglu">登录</a>
+					<a id="zhaohuimima" class="mui-pull-right">找回密码</a>
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/mui.js"></script>
+		<script type="text/javascript" src="js/castapp.js"></script>
+		<script>
+			dj.init();
+			localStorage.setItem('request_url', 'http://101.200.58.92/paotui/index.php/');
+			var input = document.getElementsByTagName('input');
+			var send_code = document.getElementById('send_code');
+			var request_url = localStorage.getItem('request_url');
+			var denglu = document.getElementById('denglu')
+			var zhaohuimima = document.getElementById('zhaohuimima')
+			var code = '';
+			var phone_data = '';
+
+			denglu.addEventListener('click', function() { //关闭自身窗口 从而发回上级页面
+				var timer1 = window.setTimeout(function() {
+
+					var ws = plus.webview.currentWebview();
+					plus.webview.close(ws);
+				}, 0);
+				//			var w = plus.webview.create('login.html');    
+				//			plus.webview.show(w,'login','600'); 
+				//			mui.openWindow({          
+				//				url:'login.html',        
+				//				id:'login'      
+				//		})   
+			})
+			zhaohuimima.addEventListener('click', function() { //关闭自身窗口，并且打开新页面
+				var timer1 = window.setTimeout(function() { //关闭自身窗口
+					var ws = plus.webview.currentWebview();
+					plus.webview.close(ws);
+				}, 1000);
+				//		var w = plus.webview.create('register.html');       //预加载
+				//			plus.webview.show(w,'register','600');          //加载
+				mui.openWindow({ //缓冲后加载
+					url: 'password.html',
+					id: 'password'
+				})
+
+			})
+
+			send_code.addEventListener('click', function() {
+
+				//判断是否再发送期之内
+				if(this.innerHTML != '获取验证码') {
+					return;
+				}
+
+				//获得手机号码     
+				var phone = input[0].value;
+				phone_data = phone;
+
+				//判断手机
+				if(phone == '') {
+					mui.toast('手机号码不能为空');
+					return;
+				}
+				if(phone.length != 11) {
+					mui.toast('手机号码位数不正确');
+					return;
+				}
+				//生成一个验证码
+				code = getcode(4);
+				console.log(code);
+				//				alert(code);   
+				$.ajax({
+					type: "get", //修改当前页面内容
+					url: "http://101.200.58.92/paotui/index.php/Web/sendSms",
+					data: {
+						code_data: code,
+						phone_data: phone,
+					},
+					async: true,
+					success: function(data) {
+						//								   alert(data) 
+						ca.prompt('短信已发送');
+					}
+				});
+
+				//				console.log(code);    
+				//发送，同时倒计时
+				mui.toast('发送成功');
+				var num = 10;
+				var timer = setInterval(function() {
+					num--;
+
+					if(num == 0) {
+
+						clearInterval(timer);
+
+						send_code.innerHTML = '获取验证码';
+					} else {
+						send_code.innerHTML = num + 'S';
+					}
+
+				}, 1000);
+
+			});
+
+			function getcode(length) {
+				if(length == undefined) {
+					length = 4;
+				}
+				var pow = Math.pow(10, length);
+				var code = Math.floor(Math.random() * pow + pow / 10).toString();
+				return code.substr(0, length);
+			}
+
+			//注册
+			var btn = document.getElementById('btn');
+			btn.addEventListener('tap', function() {
+				var phone = input[0].value;
+				var input_code = input[1].value;
+				var password = input[2].value;
+
+				if(phone == '') {
+					mui.toast('手机号码不能为空');
+					return;
+				} else if(phone_data != phone) {
+					mui.toast('手机号码不正确');
+					return;
+				} else if(input_code == '') {
+					mui.toast('验证码不能为空');
+					return;
+				}
+				if(input_code != code) {
+					mui.toast('验证码错误');
+					return;
+				}
+				if(password == '') {
+					mui.toast('密码不能为空');
+					return;
+				}
+				var time = new Date(); // 程序计时的月从0开始取值后+1
+				var m = time.getMonth() + 1;
+				var c = time.getFullYear() + "-" + m + "-" +
+					time.getDate() + " " + time.getHours() + ":" +
+					time.getMinutes() + ":" + time.getSeconds();
+
+				$.ajax({
+					type: "get", //获取贴内容
+					url: request_url + "Add/zhuce",
+					data: {
+						phone_data: phone,
+						password_data: password,
+						time_data: c,
+					},
+					async: true,
+					success: function(data) {
+						if(data == -1) {
+							ca.prompt('手机号码已注册！');
+						} else {
+							ca.prompt('注册成功！');
+							var timer1 = window.setTimeout(function() { //关闭当前界面
+								var ws = plus.webview.currentWebview();
+								plus.webview.close(ws);
+							}, 0);
+						}
+
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

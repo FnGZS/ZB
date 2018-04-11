@@ -1,0 +1,61 @@
+{
+  "ZBindex.html": {
+    "refer": [
+      "wode.html",
+      "xiaoxi.html"
+    ],
+    "resources": []
+  },
+  "wode.html": {
+    "refer": [
+      "qishiguize.html",
+      "wdedingdan.html",
+      "xinyongguanli.html",
+      "management.html",
+      "My-points.html",
+      "shezhi.html"
+    ],
+    "resources": []
+  },
+  "xiaoxi.html": {
+    "refer": [
+      "chat.html",
+      "tongzhixiaoxi.html",
+      "xitonxinxi.html"
+    ],
+    "resources": []
+  },
+  "management.html": {
+    "refer": [
+      "dongjiemingxi.html",
+      "caiwumingxi.html",
+      "chongzhimingxi.html",
+      "tixianmingxi.html",
+      "chongzhi.html",
+      "tixianzhanghuguanli.html",
+      "tixian.html"
+    ],
+    "resources": []
+  },
+  "My-points.html": {
+    "refer": [
+      "subsidiary.html",
+      "jifenguize.html"
+    ],
+    "resources": []
+  },
+  "index.html": {
+    "resources": [
+      "css/common.css",
+      "css/style4.css",
+      "css/mui.css",
+      "css/style2.css"
+    ],
+    "refer": []
+  },
+  "login.html": {
+    "refer": [
+      "register.html"
+    ]
+  }
+}

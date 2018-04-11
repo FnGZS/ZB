@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head> 
+
+    <body>  
+    <div class="beijin-baise3">
+	  <div class="beijin1"> 
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="manag1">修改支付宝账号</div>
+        </div>
+         <div class="zuorishouyi-tupian"><img src="images/zhifubao.png"></div>
+         <div class="name" id="phone1">18368532626</div> 
+      <!--  <div class="shengfengzheng">330***********7878</div>-->
+      </div>
+    </div>
+    <div class="zhifu-beijinse">
+			<div class="mui-input-row">
+			    <label style="font-size: 12px;">支付宝账号</label>
+			    <input type="text" >
+			</div>
+			<div class="zhifubao-xiahuaxian"></div>
+			<div class="mui-input-row">
+			    <label style="font-size: 12px;">确认支付宝</label>
+			    <input type="text">
+			</div>
+    </div>
+    <div class="zhenshixinming" id="phone2">此支付宝绑定手机必须为<font style="color: red;">张三</font></div>
+    
+    <div class="zhifuanniu" id="btn">提交</div>
+	</body>
+<script type="text/javascript" src="js/castapp.js" ></script>
+<script type="text/javascript" src="js/mui.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script>
+	dj.init();
+	var request_url = localStorage.getItem('request_url'); 
+	var phone = localStorage.getItem('phone'); 
+	var phone1=document.getElementById('phone1')
+	var phone2=document.getElementById('phone2')
+	var btn=document.getElementById('btn')
+	
+	var input=document.getElementsByTagName('input')
+	phone1.innerHTML=phone 
+	phone2.innerHTML='此支付宝绑定手机必须为<font style="color: red;">'+phone+'</font>'
+	
+	btn.addEventListener('click',function(){
+		if (input[0].value==input[1].value) {
+				$.ajax({                   //初始化全部
+								type: "get",         //修改当前页面内容
+								url: request_url + "Add/tianjia",     
+								data: {         
+									phone_data:phone,
+								    input_data:input[0].value,
+								  
+							 },                           
+								async: true,     
+								success: function(data) {   
+									
+									ca.prompt('修改成功'); 
+									//mui.back()    
+			    	        } 
+	               }) 
+	               
+		}else{
+			ca.prompt('2次账号不同，请重试'); 
+		}
+		 
+	})
+</script>
+</html> 

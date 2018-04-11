@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>   
+	</head> 
+    <style>
+    	span{
+    		font-size: 11px;
+    	}  
+    </style>
+	<body>     
+	    
+		<header class="mui-bar mui-bar-nav"> 
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">订单详情</h1>
+		    <!--<div class="bangzhu">帮助</div><-->	</-->
+		</header>
+		<div class="dingdanzong">
+			<div class="dingdanxingxi">
+				<img src="images/dingdan.png">
+				<div class="dingdanxingxi-left">订单信息</div>
+				<div class="dingdanxingxi-right" id="zhuangtai">未接手</div>
+			</div> 
+			<div class="dingdanxian"></div>   
+			<div class="danxinxi">订单标题： <span>送外卖</span></div>
+			<div class="danxinxi">订单编号： <span>551522476763196019661001</span></div>
+			<div class="danxinxi">发布时间：  <span>2018-3-31 15:18:43</span></div>
+			<div class="danxinxi">要求时间：<span>1</span>小时</div>
+			<div class="danxinxi">抵押金：<span>10</span>元（未抵扣）</div>
+			<div class="danxinxi">发布者： <span>阮总</span> <span></span></div>
+		</div>
+		
+		<div class="dingdan-yonghuxingxi">
+			<div class="dingdanxingxi">
+				<img src="images/yonghu.png">
+				<div class="dingdanxingxi-left">用户信息</div>
+			</div>
+			<div class="dingdanxian"></div>
+			<div class="danxinxi1">用户昵称：<span>元培学生</span><br>手机号码：<span>元培学生</span> </div>
+		</div>
+		
+		<div class="dingdan-yonghuxingxi">
+			<div class="dingdanxingxi">
+				<img src="images/jiedan.png">
+				<div class="dingdanxingxi-left">接单人信息</div>
+			</div>
+			<div class="dingdanxian"></div>
+			<div class="danxinxi1">联系方式：<span>打工族</span></div>
+		</div>
+		
+		<div class="dingdan-yonghuxingxi1">
+			<div class="dingdanxingxi">
+				<img src="images/qingkuang.png">
+				<div class="dingdanxingxi-left">接单情况</div>
+			</div>
+			<div class="dingdanxian"></div>
+			<div class="danxinxi1">
+				<div class="danxinxi">接单时间：
+					<span>2018-3-31 16:20:56</span> 
+				</div>
+				
+				<div class="danxinxi">送到：<span>目的地</span> </div>
+			</div> 
+		</div>
+		 
+		<div class="dingdan-yonghuxingxi1">
+			<div class="dingdanxingxi">
+				<img src="images/yaoqiu.png">
+				<div class="dingdanxingxi-left">接单要求</div>
+			</div> 
+			<div class="dingdanxian"></div>
+			<div class="danxinxi1"><span>需要信誉度达到标准，无违纪行为，品格良好</span></div>
+		</div>
+		
+		<div class="dingdan-yonghuxingxi">
+			<div class="dingdanxingxi">
+				<img src="images/qita.png">
+				<div class="dingdanxingxi-left">其他说明</div>
+			</div>
+			<div class="dingdanxian"></div>
+			<div class="danxinxi1"><span>效率要高</span></div>
+		</div>
+	</body>
+  <script type="text/javascript" src="js/jquery.js" ></script>
+  <script type="text/javascript" src="js/mui.js" ></script>
+  <script type="text/javascript" src="js/castapp.js" ></script>
+  <script>
+  	 dj.init()
+  	     var span=document.getElementsByTagName('span')
+  	     var request_url=localStorage.getItem('request_url'); 
+  	      var renwu_id=localStorage.getItem('renwu_id');
+  	       var dingdanzhuangtai=document.getElementById('zhuangtai')
+  	       var font=document.getElementsByName('font')
+  	      
+  	     $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/dingdanxiangxi", 
+							data: {     
+							      renwuid_data:renwu_id 
+							},                    
+							async: true,     
+							success: function(data) {   
+								  
+							 json = JSON.parse(data);    
+							 
+							 font.innerHTML=json.shangjing
+								span[0].innerHTML=json.biaoti 
+								span[1].innerHTML=json.id
+								span[2].innerHTML=json.time 
+								span[3].innerHTML=json.time1
+								span[4].innerHTML=json.diyajin
+								span[5].innerHTML=json.name
+								span[6].innerHTML='<font>¥'+json.shangjin+'</font>'
+								span[7].innerHTML=json.name
+								span[8].innerHTML=json.phone
+								
+								if (json.phone1) {
+									span[9].innerHTML=json.phone1  
+									span[10].innerHTML=json.time2  
+									span[11].innerHTML=json.ciry  
+							
+								} else{
+									span[9].innerHTML='暂无人接单'
+									span[10].innerHTML="暂无信息" 
+									span[11].innerHTML="暂无信息"
+								} 
+								span[12].innerHTML=json.yaoqiu
+								span[13].innerHTML=json.shuoming
+								
+								
+								
+								
+								
+							}                 
+			});  
+  	
+  	  
+  </script> 
+</html> 

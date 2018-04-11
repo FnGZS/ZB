@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()   
+		</script>
+	</head>
+
+    <body>
+    <div class="beijin-baise3">
+	  <div class="beijin1">  
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="manag1">修改银行卡</div>
+        </div>
+         <div class="yuanyuan"><div class="yuan"><img src="images/tuxiang.png"></div></div>
+         <div class="name" id="phone1"></div>
+         <!--<div class="shengfengzheng">330***********7878</div>--> 
+     </div> 
+    </div>
+    <div class="zhifu-beijinse">
+			<div class="mui-input-row">
+			    <label style="font-size: 12px;">卡号</label>
+			    <input style="font-size: 12px;" type="text" placeholder="请输入银行卡号" >
+			</div>
+			<div class="zhifubao-xiahuaxian"></div>
+			<div class="mui-input-row">
+			    <label style="font-size: 12px;">支付密码</label>
+			    <input style="font-size: 12px;" type="text" placeholder="请输入支付密码">
+			</div>
+			<div class="zhifubao-xiahuaxian"></div>
+			<div class="mui-input-row">
+			    <label style="font-size: 12px;">确认密码</label>
+			    <input style="font-size: 12px;" type="text" placeholder="请重输入支付密码">
+			</div>
+    </div>
+    <div class="zhenshixinming" id="phone2">此支付宝真是姓名必须是<font style="color: red;">张三</font></div>
+    
+    <div class="zhifuanniu" id="btn">提交</div>
+	</body> 
+<script type="text/javascript" src="js/castapp.js" ></script>
+<script type="text/javascript" src="js/mui.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script>
+	dj.init();
+	var request_url = localStorage.getItem('request_url'); 
+	var phone = localStorage.getItem('phone'); 
+	var phone1=document.getElementById('phone1')
+	var phone2=document.getElementById('phone2')
+	var btn=document.getElementById('btn')
+	 
+	var input=document.getElementsByTagName('input')
+	phone1.innerHTML=phone  
+	phone2.innerHTML='此银行卡预留手机号必须为<font style="color: red;">'+phone+'</font>'
+	
+	btn.addEventListener('click',function(){ 
+		if ((input[1].value==input[2].value) && (input[0].value!=null || input[0].value!='' || input[0].value!="null")) { 
+				$.ajax({                   //初始化全部
+								type: "get",         //修改当前页面内容
+								url: request_url + "Add/tianjia1",     
+								data: {           
+									phone_data:phone,
+								    input_data:input[0].value,
+								    input1_data:input[1].value
+							 },                             
+								async: true,     
+								success: function(data) {   
+									   
+									ca.prompt('修改成功'); 
+									mui.back()    
+			    	        } 
+	               }) 
+	               
+		}else{
+			ca.prompt('2次账号不同，请重试'); 
+		}
+		 
+	})
+</script>
+</html>

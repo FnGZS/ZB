@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<link
+		  
+	
+	</head>
+ 
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">充值</h1>
+        </header>   
+        
+        <div class="mui-input-row" style="margin-top: 50px; margin-bottom: 10px; background-color: #FFF">
+			<label style="font-size: 12px;">充值金额</label>
+			<input id="input1" style="font-size: 12px;" type="text" placeholder="请输入充值金额">
+		</div>
+		<div class="chongzhi"> 
+		   <div class="chongzhi-biaoti">请选择充值方式</div>
+		   <div class="xiahuaxian"></div>
+		 
+		        <div class=" mui-radio weizhi">
+		          <img src="images/zhifubao (1).png"><font>支付宝支付</font>
+				  <input name="radio" type="radio" class="input1">
+		        </div>
+		        <div style="clear: both;" class=" mui-radio weizhi">
+		          <img src="images/weixin.png"><font>微信支付</font>
+				  <input name="radio" type="radio" class="input1">
+		       </div> 
+
+		</div> 
+		<div style="margin-top: 10px;" class="zhifuanniu">提交</div>
+	</body>
+<script type="text/javascript" src="js/castapp.js" ></script>
+<script type="text/javascript" src="js/mui.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script>
+	 mui.init({     
+			beforeback: function(){           //返回上级目录时刷新内容
+				
+				//获得列表界面的webview     
+				var i = plus.webview.getWebviewById('management'); 
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新 
+			
+				 if(i){ 
+				  
+		            //触发列表界面的自定义事件（refresh）,从而进行数据刷新
+		            i.evalJS("getUserInfo()");
+		      }  
+		        return true; 
+			}
+		});
+	var request_url = localStorage.getItem('request_url'); 
+	var phone = localStorage.getItem('phone'); 
+	var btn=document.getElementsByClassName('zhifuanniu')
+	var input1=document.getElementById('input1')
+	var radio1=document.getElementsByClassName('input1')
+	var font=document.getElementsByTagName('font')
+	var zhifufangshi=''
+	var tixian
+		
+	
+			radio1[0].addEventListener('click',function(){
+					 
+					 zhifufangshi='支付宝'
+					 font[0].style.color='black'
+					 font[1].style.color='#BFBFBF'
+			})
+		 
+			radio1[1].addEventListener('click',function(){
+					  
+					  zhifufangshi='微信' 
+					  font[1].style.color='black'
+					  font[0].style.color='#BFBFBF' 
+			}) 
+    
+	btn[0].addEventListener('click',function(){
+        if (zhifufangshi=='' || zhifufangshi=='null' || zhifufangshi==null) {
+        	ca.prompt('请选择支付方式');   
+        } else{ 
+        		var time = new Date();      // 程序计时的月从0开始取值后+1
+				var m = time.getMonth() + 1;
+				var c = time.getFullYear() + "-" + m + "-" 
+				     + time.getDate() + " " + time.getHours() + ":"
+				     + time.getMinutes() + ":" + time.getSeconds();
+			
+        	$.ajax({                   //初始化全部
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chongzhi",     
+							data: {         
+								phone_data:phone,
+							    input_data:input1.value,
+							    time_data:c,  
+							    tujing_data:zhifufangshi
+						 },                           
+							async: true,     
+							success: function(data) {   
+								   
+								ca.prompt('充值成功'); 
+								mui.back() 
+		    	        } 
+               }) 
+        }
+		                      
+			
+	})
+	
+</script>
+</html>

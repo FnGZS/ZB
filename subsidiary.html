@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<link rel="stylesheet" href="css/style1.css" />
+	</head>
+
+	<body>
+	   <header style="background-color: #ffc71a;" class="mui-bar mui-bar-nav">
+	       <a style="color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	       <h1  class="mui-title">我的积分</h1>
+	   </header>
+	   
+	  	<div class="mui-content" style="background-color: #FFFFFF;"> 
+			<div class="mui-content-padded" >  
+				<!--<h5>积分获取情况</h5>-->
+				<div class="jifenzongshu">
+					<div class="jifenshumu1">本月共获取 <font> 13积分</font></div>
+					<div class="jifenshumu1">总积分 <font>26积分</font></div>
+				</div>
+				<div  class="chart" id="pieChart"></div>
+				
+			</div>
+		</div>
+		
+	    <div class="jifenjilu">积分记录</div>
+	    <div>
+	  
+	        <div class="jilu">
+	    	    <div class="shijian">
+	    		     <div class="xingqi"> 周一</div>
+	    		     <p>2018-3-26</p>
+	    	    </div>
+	    	    <div class="shuoming">签到获得积分</div>
+	    	    <div class="jifenshuliang">+1</div>
+	        </div>
+	        
+	        <div class="jilu">
+	    	    <div class="shijian">
+	    		     <div class="xingqi"> 周日</div>
+	    		     <p>2018-3-25</p>
+	    	    </div>
+	    	    <div class="shuoming">签到获得积分</div>
+	    	    <div class="jifenshuliang">+1</div>
+	        </div>
+	        <div class="jilu">
+	    	    <div class="shijian">
+	    		     <div class="xingqi"> 周日</div>
+	    		     <p>2018-3-25</p>
+	    	    </div>
+	    	    <div class="shuoming">完成订单获得积分</div>
+	    	    <div class="jifenshuliang">+0.5</div>
+	        </div> 
+	        <div class="jilu">
+	    	    <div class="shijian">
+	    		     <div class="xingqi"> 周日</div>
+	    		     <p>2018-3-25</p>
+	    	    </div>
+	    	    <div class="shuoming">抵扣押金</div>
+	    	    <div class="jifenshuliang">-3</div>
+	        </div>    
+        </div>
+	   
+	   
+	   
+	   
+	   
+	   <script src="js/echarts-all.js" ></script>
+	  <script>
+			var getOption = function(chartType) {
+				var chartOption = chartType == 'pie' ? {
+					<!--calculable: false,-->	
+					series: [{
+						name: '访问来源',
+						type: 'pie',
+						radius: ['25%', '45%'],
+						center: ['50%', '50%'],
+						avoidLabelOverlap: false,
+						data: [{
+							value: 100,
+							name: '签到积分'
+						}, {
+							value: 310,
+							name: '接单积分'
+						}, { 
+							value: 234,
+							name: '抵扣积分'
+						}]
+					}]
+				} : {
+				};
+				return chartOption; 
+			};
+			var byId = function(id) {
+				return document.getElementById(id);
+			};
+			var pieChart = echarts.init(byId('pieChart'));
+			pieChart.setOption(getOption('pie'));
+		</script>
+	</body>  
+
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+	</head>
+
+	<body > 
+		<div class="mui-content">
+		    <div id="head">
+		    	<img src="images/userimg.jpg" id="img">
+		    	<div class="phone" id="name1"> 
+		    		Effort  
+		    	</div>      
+		    	<div class="number" id="iid"> 
+		    		ID 17857058385  
+		    	</div>
+		    	<div class="xinyong" id="xinyong">
+		    		信用
+		    		
+		    		<span class="iconfont icon-xingxing"></span>
+		    		<span class="iconfont icon-xingxing"></span>
+		    		<span class="iconfont icon-xing"></span>
+		    		<span class="iconfont icon-xing"></span>
+		    		<span class="iconfont icon-xing"></span>
+		    	</div>
+		    		
+		    </div> 
+		    <div id="centre">
+		    	<div class="mes">
+		    		<div class="money">
+		    			<div>0</div>
+		    			<div>账户余额</div>
+		    		</div>
+		    		<div class="basic-score">
+		    			<div>0</div>
+		    			<div>冻结金额</div>
+		    		</div>
+		    		<div class="score">
+		    			<div>0</div>
+		    			<div>积分</div>
+		    		</div>	    		 
+		    	</div>  
+		    	<img class="invent-img" src="images/invent.jpg">
+		    	<div class="list" >
+		    		<ul class="mui-table-view" >
+		    			<li class="mui-table-view-cell " id="wodedingdan">
+		    				<span class="iconfont icon-dingdan"></span>
+		    				我的订单
+		    			</li>
+		    			<li class="mui-table-view-cell">
+		    				<span class="iconfont icon-yaoqingjiangli"></span>
+		    				推荐有奖 
+		    			</li>
+		    			<li class="mui-table-view-cell " id="wodexinxi">
+		    				<span class="iconfont icon-zhanghuziliao"></span> 
+		    				 我的信息
+		    			</li> 
+		    			<li class="mui-table-view-cell " id="zijinguanli">
+		    				<span class="iconfont icon-money"></span>   
+		    				资金管理 
+		    			</li>
+		    			<li class="mui-table-view-cell " id="wodejifen">
+		    				<span class="iconfont icon-jifen"></span> 
+		    				我的积分
+		    			</li>
+		    			<li class="mui-table-view-cell " id="xinyongguanli">
+		    				<span class="iconfont icon-xinyongguanli"></span> 
+		    				信用管理
+		    			</li>
+		    			<li class="mui-table-view-cell" id="qishixueyuan">
+		    				<span class="iconfont icon-shuben"></span> 
+		    				骑士学院
+		    			</li>
+		    			<li class="mui-table-view-cell " id="shezhi">
+		    				<span class="iconfont icon-shezhi"></span> 
+		    				设置
+		    			</li>
+		    		</ul>
+		    	</div>
+		    	<div class="button">
+		    		<div class="problem">
+		    			<span class="iconfont icon-changjianwenti"></span> 
+		    			<div>常见问题</div>
+		    		</div>
+		    		<div class="feedback">
+		    			<span class="iconfont icon-yijianfankui"></span> 
+		    			<div>意见反馈</div>
+		    		</div>
+		    		<div class="content">
+		    			<span class="iconfont icon-kefu"></span> 
+		    			<div>电话客服</div>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<script type="text/javascript" src="js/castapp.js" ></script>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript"> 
+			var xinxi = document.getElementsByClassName('xinxi');
+			var wodexinxi=document.getElementById('wodexinxi')
+			var wodedingdan=document.getElementById('wodedingdan')
+			var zijinguanli = document.getElementById('zijinguanli');
+			var wodejifen = document.getElementById('wodejifen');
+			var xinyongguanli = document.getElementById('xinyongguanli');
+			var qishixueyuan = document.getElementById('qishixueyuan');
+			var shezhi = document.getElementById('shezhi');
+			var phone=localStorage.getItem('phone');
+			var request_url=localStorage.getItem('request_url');
+			var login_url=localStorage.getItem('login_url')
+		    var img=document.getElementById('img') 
+		    var name1=document.getElementById('name1') 
+		    var iid=document.getElementById('iid')
+		    var xinyong=document.getElementById('xinyong')
+		    var aaspan=""
+			 $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone, 
+							},                   
+							async: true,   
+							success: function(data) {    
+							     json = JSON.parse(data);  
+								 img.src=  login_url + json.imgurl 
+								 name1.innerHTML=json.name 
+								 iid.innerHTML='ID:'+json.id
+								 
+								 for (var i=0;i<json.xinyong;i++) {  
+								 	  aaspan = aaspan + ' <span class="iconfont icon-xingxing"></span>'
+								 }  
+								 for (var i=json.xinyong;i<5;i++) {   
+								 	  aaspan = aaspan + ' <span class="iconfont icon-xing"></span>'
+								 } 
+								   
+								  xinyong.innerHTML="信用" +  aaspan 
+								localStorage.setItem('gerenxinxi',data); 
+							  
+								  
+							}                 
+			});  
+			wodedingdan.addEventListener('click',function(){    //我的订单
+				mui.openWindow({
+						url: 'wdedingdan.html', //需要打开页面的url地址 
+						id: 'wdedingdan', //需要打开页面的url页面id		
+					});
+			})  
+			
+			
+			wodexinxi.addEventListener('tap',function(){         //我的信息
+				mui.openWindow({
+						url: 'wodexinxi.html', //需要打开页面的url地址 
+						id: 'wodexinxi', //需要打开页面的url页面id		
+					});
+			});
+			
+			
+			zijinguanli.addEventListener('tap',function(){      //资金管理
+				mui.openWindow({
+						url: 'management.html', //需要打开页面的url地址 
+						id: 'management', //需要打开页面的url页面id		
+					});
+			});   
+			
+			
+		
+			wodejifen.addEventListener('tap',function(){       //我的积分
+				mui.openWindow({ 
+						url: 'My-points.html', //需要打开页面的url地址 
+						id: 'My-points', //需要打开页面的url页面id		
+					});
+			}); 
+			
+			xinyongguanli.addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'xinyongguanli.html', //需要打开页面的url地址 
+						id: 'xinyongguanli', //需要打开页面的url页面id		
+					});
+			});
+			qishixueyuan.addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'qishiguize.html', //需要打开页面的url地址 
+						id: 'qishiguize', //需要打开页面的url页面id		
+					});
+			});
+			
+			shezhi.addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'shezhi.html', //需要打开页面的url地址 
+						id: 'shezhi', //需要打开页面的url页面id		
+					});
+			});
+			
+		    
+		   
+		   function getUserInfo(){ //放回此页面时刷新内容
+		   	 $.ajax({      
+							type: "get",         //修改当前页面内容
+							url: request_url + "Add/chaxun", 
+							data: {    
+							    phone_data:phone, 
+							},                   
+							async: true,   
+							success: function(data) {    
+							     json = JSON.parse(data);  
+								 img.src=  login_url + json.imgurl 
+								 name1.innerHTML=json.name 
+								 iid.innerHTML='ID:'+json.id
+								 aaspan='' 
+								 for (var i=0;i<json.xinyong;i++) {  
+								 	  aaspan = aaspan + ' <span class="iconfont icon-xingxing"></span>'
+								 }  
+								 for (var i=json.xinyong;i<5;i++) {   
+								 	  aaspan = aaspan + ' <span class="iconfont icon-xing"></span>'
+								 } 
+								 
+								  xinyong.innerHTML="信用" +  aaspan
+								  
+								localStorage.setItem('gerenxinxi',data);    //本地存储个人信息
+							}                 
+			});  
+		    
+		   } 
+			  
+			
+			
+		</script>
+	</body>
+
+</html>

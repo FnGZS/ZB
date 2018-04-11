@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head> 
+
+	<body>
+		<header class="mui-bar mui-bar-nav public-color " > 
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left public-font-color" ></a>
+			<h1 class="mui-title public-font-color" >我的订单</h1>
+		</header> 
+		<div class="wddingdan">  
+			<div id="leixing" class="wddingdan-left">类型<img class="bu" class src="images/xiangxiajiantou.png"></div>
+			<div class="geduan"></div>
+			<div id="paixun" class="wddingdan-main">价格排序<img class="bu" src="images/xiangxiajiantou.png"></div>	
+
+		</div>
+		<div id="fanhui" class="mui-backdrop" style=" position: absolute; z-index: 999;  display: none; margin-top: 170px;"></div>
+		<div style="display: none;"  class="wdedingdan-jiemian li">
+	            <div class="wddingdan-hengxian"></div> 
+				<div class="jiehuo">拿货</div> 
+				<div class="wddingdan-hengxian"></div>
+				<div class="jiehuo">取货</div>
+				<div class="wddingdan-hengxian"></div>
+				<div class="jiehuo">代拿</div>
+				<!--<div class="wddingdan-hengxian"></div>-->
+		</div>
+		<div style="display: none;" class="wdedingdan-jiemian li">
+				<div class="jiehuo">只能排序</div>
+				<div class="wddingdan-hengxian"></div>
+				<div class="jiehuo">价格最低</div>
+				<div class="wddingdan-hengxian"></div>
+				<div class="jiehuo">价格最高</div>
+				<!--<div class="wddingdan-hengxian"></div>-->
+		</div>
+		<div class="wdedingdan-tupian"><img src="images/guid.jpg"></div>
+		<div class="wdedingdan-zong">
+			<div class="wdedingdan-zong-left">
+				<div class="wdedingdan-zong-left-fen bai sort-list">全部</div>
+				<div class="wdedingdan-zong-left-fen sort-list">接单中</div>
+				<div class="wdedingdan-zong-left-fen sort-list">待验收</div>
+				<div class="wdedingdan-zong-left-fen sort-list">撤销中</div>
+				<div class="wdedingdan-zong-left-fen sort-list">已结算</div>
+				<div class="wdedingdan-zong-left-fen sort-list">已撤销</div>
+			</div> 
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			    <div class="wdedingdan-zong-right-fen nei "> 
+			        
+			        
+			    </div>    
+			    
+			</div>
+			
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			     <div class="wdedingdan-zong-right-fen nei">
+			       
+			    </div>  
+			</div>
+			
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			     <div class="wdedingdan-zong-right-fen nei">
+			        
+			    </div>  
+			</div>
+			
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			   <div class="wdedingdan-zong-right-fen nei">
+			        
+			    </div>  
+			</div>
+			
+			
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			    <div class="wdedingdan-zong-right-fen nei">
+			       
+			    </div>  
+			</div>
+			<div class="wdedingdan-zong-right lis1 sort-conten">
+				<!--分页-->
+			    <div class="wdedingdan-zong-right-fen nei">
+			       
+			    </div>  
+			     
+			     <div class="wdedingdan-zong-right-fen nei">
+			       
+			    </div>  
+			</div>
+		</div> 
+		<script>  
+			var s=0,z=0;
+			var leixing=document.getElementById('leixing');
+			var paixun=document.getElementById('paixun');
+			var fanhui=document.getElementById('fanhui');
+			var li=document.getElementsByClassName('li');
+			var bu=document.getElementsByClassName('bu');
+			var quan=document.getElementsByClassName('wdedingdan-zong-left-fen');
+			var fenye=document.getElementsByClassName('wdedingdan-zong-right');
+			
+			for( var i=0;i<quan.length;i++) 
+			{
+				quan[i].index=i;
+				quan[i].addEventListener('tap',function(){
+					for(var i=0;i<fenye.length;i++)
+					{
+						fenye[i].style.display='none';
+						quan[i].className="wdedingdan-zong-left-fen";
+					}  
+					fenye[this.index].style.display='block'; 
+					quan[this.index].className="wdedingdan-zong-left-fen bai";
+				})
+			}
+			  
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			leixing.addEventListener('tap',function(){
+		        paixun.style.color='#000';
+				bu['1'].style.transform = "rotate(180deg)";
+				bu['1'].src="images/xiangxiajiantou.png";
+				li['1'].style.display='none';
+				fanhui.style.display='none';
+				z=0;
+				if(s==0)
+				{
+					leixing.style.color='#1296db';
+					bu['0'].style.transform = "rotate(180deg)";
+					bu['0'].src="images/xiangshangjiantou.png";
+					li['0'].style.display='block';
+                    fanhui.style.display='block';
+					s=1;
+				}
+				else if(s==1)
+				{
+					leixing.style.color='#000';
+					bu['0'].style.transform = "rotate(180deg)";
+					bu['0'].src="images/xiangxiajiantou.png";
+					li['0'].style.display='none';
+					fanhui.style.display='none';
+					s=0;
+				} 
+			}) 
+			
+			paixun.addEventListener('tap',function(){
+				leixing.style.color='#000';
+				bu['0'].style.transform = "rotate(180deg)";
+				bu['0'].src="images/xiangxiajiantou.png";
+				li['0'].style.display='none';
+				fanhui.style.display='none';
+				s=0;
+				if(z==0)
+				{
+					paixun.style.color='#1296db';
+					bu['1'].style.transform = "rotate(180deg)";
+					bu['1'].src="images/xiangshangjiantou.png";
+					li['1'].style.display='block';
+                    fanhui.style.display='block';
+					z=1;
+				}
+				else if(z==1)
+				{
+					paixun.style.color='#000';
+					bu['1'].style.transform = "rotate(180deg)";
+					bu['1'].src="images/xiangxiajiantou.png";
+					li['1'].style.display='none';
+					fanhui.style.display='none';
+					z=0;
+				}
+			}) 
+		    
+		    fanhui.addEventListener('tap',function(){
+		    	fanhui.style.display='none';
+		    	leixing.style.color='#000';
+				bu['0'].style.transform = "rotate(180deg)";
+				bu['0'].src="images/xiangxiajiantou.png";
+				li['0'].style.display='none';
+		    	paixun.style.color='#000';
+				bu['1'].style.transform = "rotate(180deg)";
+				bu['1'].src="images/xiangxiajiantou.png";
+				li['1'].style.display='none';
+		    })
+		    
+		
+		</script>
+	</body>  
+
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/style2.css" />
+		<script src="js/mui.min.js">
+			
+		</script>
+	</head>  
+    
+	<body>
+		<div class="mui-content1 mui-fullscreen">  
+			<div class="login-a"> 
+				<img src="images/fengniaokeji.png" />    
+			</div> 
+			<div class="login-b"  style="filter:alpha(Opacity=60);-moz-opacity:0.8;opacity: 0.8 " >
+				<div class="login-b-b">
+					<!--<div class="login-b-b-left">账号</div>-->
+					<div class="login-b-b-right">
+						<input type="text" placeholder="请输入你的手机号" / id="input1">
+					</div> 
+				</div> 
+				<div class="login-b-b">
+					<!--<div class="login-b-b-left">密码</div>-->
+					<div class="login-b-b-right">
+						<input type="password" placeholder="请输入你的密码" /  id="input2">
+					</div>
+				</div>
+			</div>
+			<div class="btn">
+				<button style="background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);" id="btn1">登录</button> 
+				<p>  
+					<a  id="zhuce">注册</a>
+					<a id="zhaohuimima" class="mui-pull-right">找回密码</a>     
+				</p>  
+			</div> 
+			<div class="login-line">
+				<span style="white-space:pre"></span><span class="line"></span>
+				<span style="white-space:pre"></span><span class="txt">其他方式登录</span>
+				<span style="white-space:pre"></span><span class="line"></span>
+			</div>
+		<div class="sdk-a">   
+				<a href="#" class="mui-icon mui-icon-qq"></a>
+				<a href="#" class="mui-icon mui-icon-weixin"></a>
+				<a href="#" class="mui-icon mui-icon-weibo"></a>
+		</div> 
+
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="js/jquery.js" ></script>
+	<script type="text/javascript" src="js/mui.js" ></script>
+	<script type="text/javascript" src="js/castapp.js" ></script>
+	
+	  <script> 
+	  	dj.init();
+	  			localStorage.setItem('request_url','http://101.200.58.92/paotui/index.php/'); 
+	  	var input1=document.getElementById('input1')
+	  	var input2=document.getElementById('input2')
+	  	var zhuce=document.getElementById('zhuce')
+	  	var btn1=document.getElementById('btn1')
+	
+	  	var request_url=localStorage.getItem('request_url');
+	  	var phone=localStorage.getItem('phone');
+	  	var zhaohuimima=document.getElementById('zhaohuimima')
+	  	 
+//	  	if (phone) {
+//	  		ca.prompt('登录成功！');     
+//	  		var timer1=window.setTimeout(function(){
+//	    	var ws=plus.webview.currentWebview();
+//					plus.webview.close(ws);  
+//			},1000);
+//			var w = plus.webview.create('index.html');    
+//			plus.webview.show(w,'index','600'); 
+//			mui.openWindow({         
+//					url:'index.html',        
+//					id:'index'      
+//			}) 
+//	  	}
+
+zhuce.addEventListener('click',function(){
+//	var timer1=window.setTimeout(function(){         //关闭自身窗口
+	  
+//			var ws=plus.webview.currentWebview();
+//					plus.webview.close(ws);  
+//			},1000); 
+//		var w = plus.webview.create('register.html');       //预加载
+		//	plus.webview.show(w,'register','600');          //加载
+		mui.openWindow({                       //缓冲后加载
+				url:'register.html',        
+				id:'register'       
+		})    
+	
+})
+
+zhaohuimima.addEventListener('click',function(){
+//	var timer1=window.setTimeout(function(){         //关闭自身窗口
+	  
+//			var ws=plus.webview.currentWebview();
+//					plus.webview.close(ws);  
+//			},1000); 
+//		var w = plus.webview.create('register.html');       //预加载
+		//	plus.webview.show(w,'register','600');          //加载
+		mui.openWindow({                       //缓冲后加载
+				url:'password.html',        
+				id:'password'       
+		})    
+	
+})
+	  	btn1.addEventListener('click',function(){
+	  		          $.ajax({   
+							type: "get",         //修改当前页面内容
+							url: request_url + "Acc/denglu",   
+							data: {   
+							    phone_data:input1.value, 
+							    password_data:input2.value 
+						 },                   
+							async: true,    
+							success: function(data) {    
+								  
+								json = JSON.parse(data);  
+							
+								if (data==-1) {
+									  ca.prompt('手机号码或密码错误，请重试'); 
+								}else{
+   							    	ca.prompt('登录成功！');         
+									localStorage.setItem('phone',input1.value); 
+								 	   
+									var timer1=window.setTimeout(function(){
+	    				
+										var ws=plus.webview.currentWebview();
+											plus.webview.close(ws);  
+									},2000);
+					    			var w = plus.webview.create('index.html');    
+									plus.webview.show(w,'index','1000');  
+//									mui.openWindow({         
+//						    				url:'index.html',        
+//						    				id:'index'      
+//						    		}) 
+								}
+							}                 
+			});
+	  	})
+	  </script>
+
+</html>

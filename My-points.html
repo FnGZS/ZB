@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<link rel="stylesheet" href="css/style1.css" />
+	</head>
+
+	<body style="background-color: #dbdbdb;">
+	<!--头部-->
+	<div class="beijin-baise">
+	  <div class="beijin">
+        <div class="my-points-header">
+            <a style="margin: 10px 0px 0px 5px; color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <div class="qiandao" id="qd"> 签到</div>
+        </div>
+        <div class="my-points-touxiang">
+          	<div class="my-points-touxiang-images">
+          	    <img src="images/tuxiang.png">
+          	</div> 	
+        </div>
+        <div class="dangqianjifen">
+        	您已连续签到0天，您的积分总计0个
+        </div>
+        <div class="xiaotu">
+        	积分任务墙
+        </div>
+      </div>
+    </div>
+    <!--正文--> 
+    <div class="my-pointsmain">
+        <div class="my-points-main">
+           <img src="images/danzi.png">
+           <div class="shoudan1">首次接单</div>
+           <div class="shoudan2">+2</div>
+        </div>
+        
+        <div class="xiahuaxian"></div>
+        <div class="my-points-main">
+           <img src="images/quanquan.png">
+           <div class="shoudan1">首单完成</div>
+           <div class="shoudan2">+10</div>
+        </div>
+        <div class="xiahuaxian"></div>
+        
+         <div class="my-points-main">
+           <img src="images/rili.png">
+           <div class="shoudan1">日单（每天）</div>
+           <div class="shoudan2">+0.5</div>
+        </div>
+        <div class="xiahuaxian"></div>
+        
+        <div class="my-points-main" id="mingxi">
+           <img src="images/mingxi.png">
+           <div class="shoudan1">积分明细</div>
+        </div>
+        <div class="xiahuaxian"></div>
+        
+        <div class="my-points-main" id="jifenguize">
+           <img src="images/guize.png">
+           <div class="shoudan1">积分规则</div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    <!--js-->
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript">
+		mui.init()
+		var qiandao = document.getElementById('qd');
+		var jifenguize= document.getElementById('jifenguize');
+		var mingxi = document.getElementById('mingxi');
+    	qiandao.addEventListener('tap',function(){
+	            mui.toast("已签到+1");	
+			})
+        mingxi.addEventListener('tap',function(){
+	          mui.openWindow({
+	          	url:'subsidiary.html',
+	          	id:'subsidiary'
+	          });
+			}) 
+	    jifenguize.addEventListener('tap',function(){
+	          mui.openWindow({
+	          	url:'jifenguize.html',
+	          	id:'jifenguize'
+	          });
+			})
+    </script>
+	</body>
+
+</html>
