@@ -10,7 +10,10 @@
     "icons": {
         "72": "icon.png"
     },
+<<<<<<< HEAD
     "launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+=======
+>>>>>>> c959585327ebaf5928406c8632aaef9ca786ee0e
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
@@ -259,7 +262,10 @@
 					"css/mui.css",
 					"css/style2.css"
 				],
-				"refer": [],
+				"refer": [
+					"xiaoxi.html",
+					"wode.html"
+				],
 				"priority": 0
 			},
 			"login.html": {

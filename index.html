@@ -40,7 +40,7 @@
 				document.addEventListener("plusready", plusReady, false);
 			}
 			// 显示侧滑页面   
-			function showSide() {
+			function showSide1() {
 				// 防止快速点击可能导致多次创建
 				if(wc) {
 					return;
@@ -49,7 +49,8 @@
 				ws.setStyle({
 					mask: "rgba(0,0,0,0.5)"
 				});
-				// 创建侧滑页面   
+				// 创建侧滑页面  
+//					wc=plus.webview.create("wode.html","side",{right:"15%",width:"85%",popGesture:"none"});
 				wc = plus.webview.create("wode.html", "wode", {
 					left: "15%",
 					width: "85%",
@@ -69,7 +70,7 @@
 				}, false);
 			}
 
-			function showSide1() {
+			function showSide() {
 				// 防止快速点击可能导致多次创建
 				if(wc) {
 					return;
@@ -79,10 +80,10 @@
 					mask: "rgba(0,0,0,0.5)"
 				});
 				// 创建侧滑页面   
-				//	wc=plus.webview.create("wode.html","side",{left:"15%",width:"85%",popGesture:"none"});
+//					wc=plus.webview.create("wode.html","side",{left:"100%",width:"85%",popGesture:"none"});
 				wc = plus.webview.create("xiaoxi.html", "xiaoxi", {
-					right: "15%",
-					width: "85%",
+					right: "65%",
+					width: "35%",
 					popGesture: "none"
 				});
 				// 侧滑页面关闭后关闭遮罩
