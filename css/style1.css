@@ -155,7 +155,7 @@
 /*	border:red solid 1px;*/
 }
 .shijian{
-	color: #cdcdcd;
+	color: #9f9f9f;
 	margin-left: 4px;
 	margin-top: 5px;
 	font-size: 12px;
@@ -180,7 +180,7 @@
 /*	border:red solid 1px;*/
 }
 .jifenshuliang{
-	color: red;
+	color: #FF5053;
 	font-size: 18px;
 	float: right;
 	padding: 12px 3px 0px 0px;
@@ -199,12 +199,13 @@
 	
 }
 .jifenguize1{
+	margin-bottom: 5px;
 	font-family: "楷体";
 	font-size: 15px;
-	margin-top: 10px;
+	margin-top: 25px;
 }
 .jifenguize2{
-	line-height: 20px;
+	line-height: 15px;
 	font-size: 15px;
 	padding-left: 9px;
 	height: 50px;
@@ -530,9 +531,9 @@
 	
 }
 .zuorishouyi-tupian img{
-	margin-top: 20px;
-	width: 90px;
-	height: 90px;
+	margin-top:40px;
+	width: 160px;
+	height: 70px;
 	
 }
 .name{
@@ -566,7 +567,7 @@
 	text-align: center;
 	margin: auto;
 	width: 90%;
-	background-color:#17abe3 ;
+	background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
 	height: 40px;
 	border-radius: 30px;
 }
@@ -794,7 +795,7 @@
 	text-align: center;
 	margin: auto;
 	width: 95%;
-	background-color:#17abe3 ;
+	background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
 	height: 40px;
 	border-radius: 10px;
 }
@@ -807,7 +808,7 @@
 	background-color: #fff;
 	border-radius: 15px;
 	padding-top: 45px;
-	background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+	background-color: #fff;
 }
 .yonghu1{
 	padding-left: 30px;
@@ -825,8 +826,8 @@
 }
 .yonghu1-image{
 	margin-top: 7px;
-	width: 70px;
-	height: 70px;
+	width: 40px;
+	height: 40px;
 	float: left;
 	border-radius: 50%;
 }
@@ -849,13 +850,14 @@
 }
 .yonghu1-name{
 	color: #fff;
-	font-size: 18px;
-	padding-top: 17px;
+	font-size: 15px;
+	/*padding-top: 17px;*/
 	margin-left: 10px;
-	margin-top: 10px;
-	width: 100px;
+	margin-top: 13px;
+	width: 30px;
 	height: 30px;
 	float: left;
+	/*border: red solid 1px;*/
 }
 .xiahuaxian1{
 	float: right;
@@ -881,7 +883,7 @@
 }
 .xiotng2{
 	font-family: "微软雅黑";
-	color: #fff;
+	/*color: #fff;*/
 	margin-left: 10px;
 	margin-top: 10px;
 	float: left;
@@ -907,7 +909,7 @@
 }
 .xitong-tubiao img{
 	width: 100px;
-	height: 100px;
+	height: 80px;
 }
 .banbenhao{
 	padding-top: 3px;
@@ -1071,19 +1073,19 @@
 .wdedingdan-jiemian{
 	background-color: #fff;
 	width: 100%;
-	height: 95px;
+	height: 120px;
 	position: absolute;
 	z-index: 999;
 	margin-top: 74px;
 	/*border: red solid 1px;*/
 }
 .jiehuo{
-	padding-top: 3px;
+	padding-top: 10px;
 	/*border: red solid 1px;*/
 	font-size: 15px;
 	padding-left: 10px;
 	width: 100%;
-	height: 30px;
+	height: 40px;
 }
 .wddingdan-hengxian{
 	width: 100%;
@@ -1126,9 +1128,9 @@
 }
 .bai{
 	border:#e6e6e6 solid 1px;
-	border-left: #1296db solid 2px;
+	border-left: #EECFA1 solid 2px;
     background-color: #fff;
-	color: #1296db;
+	color: #EECFA1;
 }
 .wdedingdan-zong-right-fen{
 	margin-bottom: 10px;
@@ -1227,7 +1229,7 @@
 	font-size: 13px;
 }
 .dingdanxingxi-right{
-	color: #1196db;
+	color: red;
 	margin-right: 10px;
 	margin-top: 5px;
 /*	border: red solid 1px;*/

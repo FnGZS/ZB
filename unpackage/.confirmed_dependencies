@@ -51,11 +51,15 @@
       "css/mui.css",
       "css/style2.css"
     ],
-    "refer": []
+    "refer": [
+      "xiaoxi.html",
+      "wode.html"
+    ]
   },
   "login.html": {
     "refer": [
       "register.html"
-    ]
+    ],
+    "resources": []
   }
 }

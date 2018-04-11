@@ -126,8 +126,9 @@ div{
 }
 .gywm-a img{
 	width: 80px;
-	height: 80px;
+	/*height: 80px;*/
 	margin: 20px auto  5px;
+	margin-top: 60px;
 	border-radius: 5px;
 }
 .gywm-a h4{
@@ -159,11 +160,17 @@ div{
 	color: #999999;
 	text-align: center;
 	margin-top: 50px;
+	position: absolute; 
+	bottom: 30px;
+	width: 100%;
 }
 .gywm-bottom2{
 	color: #999999;
-	text-align: center;
-	margin-top: 5px;
+	text-align: center ;
+	/*margin-top: 5px;*/
+    width: 100%;
+	position: absolute; 
+	bottom: 10px;
 }
 
 /*登录密码*/
