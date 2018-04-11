@@ -21,7 +21,7 @@ body{
 {
     color: #FF6F41 !important;
     
-    background: none;
+    background: #FF6F41;
 }
 .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-progress-bar
 {
