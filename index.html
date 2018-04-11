@@ -18,7 +18,7 @@
 	                padding: 0;
 	                width: 100%;
 	                height: 100%;
-	}	 
+	}	  
 		</style>
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript">
@@ -109,7 +109,7 @@
 
 	<body>
 		<div class="ZBindex-content" id='1'>
-			<header class="mui-bar mui-bar-nav " style="background: #FFB05F !important;">
+			<header class="mui-bar mui-bar-nav " style="background: linear-gradient(to right, #FF905C , #FFC060); !important;">
 				<a class="mui-icon mui-icon-bars mui-pull-left" style="color: white;" onclick="showSide()"></a>
 				<!--侧滑地图-->
 				<a class="mui-icon mui-icon-contact mui-pull-right"style="color: white;" onclick="showSide1()"></a>
@@ -380,8 +380,8 @@
 					var address = result['province'] + result['district'] + result['street'];
 
 					//data 有很多信息，大家如果需要可以for in出来看下
-					document.getElementById('ZBindex-rob-text-dw').innerHTML = "我在:" + address;
-					document.getElementById('ZBindex-rob-text-dw2').innerHTML = "我在:" + address;
+					document.getElementById('ZBindex-rob-text-dw').innerHTML = "位置:" + address;
+					document.getElementById('ZBindex-rob-text-dw2').innerHTML = "位置:" + address;
 				}, 'json'
 			);
 
