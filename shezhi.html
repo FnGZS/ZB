@@ -50,6 +50,11 @@
 								<span style="font-size: 25px;"></span>关于我们
 							</a>
 						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span style="font-size: 25px;"></span>系统信息
+							</a>
+						</li>
 					</ul>
 				</div>
 				<ul class="mui-table-view btn" style="margin-top: 8px;">
@@ -86,7 +91,12 @@
 						id: 'guanyuwomen', //需要打开页面的url页面id		
 				});
 			})
-			
+			cell[5].addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'xitonxinxi.html', //需要打开页面的url地址 
+						id: 'xitonxinxi', //需要打开页面的url页面id		
+				});
+			})
 			var btn = document.getElementsByClassName('btn');
 			btn[0].addEventListener('tap',function(){
 				var btnArray = ['是', '否'];

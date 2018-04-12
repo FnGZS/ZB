@@ -3,7 +3,8 @@
 .beijin-baise{
 	width: 100%;
 	height: 240px;
-	background-color: #FFB05F;
+	background-image: linear-gradient(to top, #04befe 100%,#4481eb 0%);
+
 }
 
 .beijin{
@@ -27,8 +28,10 @@
 	border-radius:25px ;
 }
 .my-points-header{
-	height: 35px;
+	height: 45px;
 	width: 100%;
+	background-color: #FFB05F;
+
 	/*border: red solid 1px;*/
 }
 .my-points-touxiang{
@@ -47,6 +50,7 @@
 	border-radius:50px;
 }
 .my-points-touxiang-images img{
+	margin-top: 10px;
 	width:100%;
 	height:100%;
 }
@@ -218,19 +222,24 @@
 	background-color: #FFB05F;
 }
 .beijin-baise2{
+	/*border: red solid 1px;*/
 	width: 100%;
 	height: 110px;
-	background-color: #FFB05F;
+	background-image: linear-gradient(to top, #04befe 100%,#4481eb 0%);
+
 }
 .beijin-baise3{
 	width: 100%;
 	height: 210px;
-	background-color: #FFB05F;
+	background-image: linear-gradient(to top, #04befe 100%,#4481eb 0%);
+
 }
 .beijin1{
 	background-repeat: no-repeat;
 	width: 100%;
 	height: 200px;
+	background-image: linear-gradient(to top, #04befe 100%,#4481eb 0%);
+
 	/*border: red solid 1px;*/
 }
 .zijinguanli-header1{
