@@ -12,6 +12,7 @@
     },
 <<<<<<< HEAD
     "launch_path": "zengtianzhifubaozhanghao.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+=======
 <<<<<<< HEAD
     "launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 =======
