@@ -13,7 +13,8 @@
       "xinyongguanli.html",
       "management.html",
       "My-points.html",
-      "shezhi.html"
+      "shezhi.html",
+      "wodexinxi.html"
     ],
     "resources": []
   },
@@ -58,8 +59,14 @@
   },
   "login.html": {
     "refer": [
-      "register.html"
+      "register.html",
+      "index.html"
     ],
     "resources": []
+  },
+  "wodexinxi.html": {
+    "resources": [
+      "/js/city.data.js"
+    ]
   }
 }

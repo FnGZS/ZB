@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="combinationSelect/picker.css" />
+		<link rel="stylesheet" type="text/css" href="combinationSelect/poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+			<script src="/js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		
+		<style>
+			input {
+				font-size: 13px;
+				text-align: right;
+			} 
+			
+			label {
+				display: block;
+				margin-top: 5px;
+			}
+			
+			.mui-btn {
+				display: block;
+				width: 120px;
+				margin: 10px auto;
+			}
+			
+			#info {
+				padding: 20px 10px;
+			}
+		</style> 
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav public-color ">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left public-font-color"></a>
+			<a id="confirmBtn" class="iconfont icon-gougou mui-pull-right" style="padding-top: 13px; padding-right:8px ; font-size:20px !important; color: white;"></a>
+			<h1 class="mui-title public-font-color">我的信息</h1>
+		</header>
+		<div class="mui-content">
+			<div class="input">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>头像</label>
+						<img id="img" src="images/userimg.jpg" style="height: 30px;width: 30px;float: right;margin-right: 20px;margin-top: 5px;" />
+					</div>
+					<div class="mui-input-row">
+						<label>ID</label>
+						<input type="text" disabled="disabled" placeholder="201803248385">
+					</div>
+					<div class="mui-input-row">
+						<label>昵称</label>
+						<input type="text" placeholder="请输入您的昵称">
+					</div>
+					<div class="mui-input-row">
+						<label>性别</label>
+						<input disabled="disabled" type="text" placeholder="请选择您的性别">
+					</div>
+					<div class="mui-input-row"  id="showCityPicker3">
+						<label>城市</label>
+						 
+						
+                       <input id="showCityPicker3" disabled="disabled" type="text" placeholder="请选择您的性别">
+                     
+                        	 
+                        
+					</div>
+					<!--<button id='showCityPicker3' class="mui-btn mui-btn-block" type='button'>三级联动示例 ...</button>-->
+					<div id='cityResult3' class="ui-alert"></div>
+				</form>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="js/castapp.js"></script>
+		<script type="text/javascript" src="js/mui.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/mui.picker.js"></script>
+		<script type="text/javascript" src="js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="js/city.data-3.js"></script>
+		<script type="text/javascript" src="js/city.data.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			mui.init({
+				beforeback: function() { //返回上级目录时刷新内容
+
+					//获得列表界面的webview     
+					var i = plus.webview.getWebviewById('wode');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新 
+
+					if(i) {
+
+						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+						i.evalJS("getUserInfo()");
+					}
+					return true;
+				}
+			});
+
+			var cell = document.getElementsByClassName('mui-input-row');
+			var img = document.getElementById('img');
+			var input = document.getElementsByTagName('input');
+			var phone = localStorage.getItem('phone');
+			var request_url = localStorage.getItem('request_url');
+			var login_url = localStorage.getItem('login_url');
+			
+			var img_url;
+			var info = document.getElementById("info");
+
+			$.ajax({
+				type: "get", //修改当前页面内容 
+				url: request_url + "Add/chaxun",
+				data: {
+					phone_data: phone,
+				},
+				async: true,
+				success: function(data) {
+					json = JSON.parse(data);
+
+					console.log(login_url + json.imgurl)
+					img.src = login_url + json.imgurl
+					img_url = img.src
+					input[0].value = json.id
+					input[1].value = json.name
+					input[2].value = json.sex
+					input[3].value = json.ciry
+
+				}
+			});
+
+			cell[0].addEventListener('click', function() {
+
+				mui.plusReady(function() {
+
+					var btnArray = [{
+						title: "照相机"
+					}, {
+						title: "相册"
+					}]; //选择按钮  1 2 3
+					plus.nativeUI.actionSheet({
+							title: "请选择",
+							cancel: "取消", // 0
+							buttons: btnArray
+						},
+						function(e) {
+							var index = e.index; // 
+
+							if(index == 1) {
+								//照相机
+								var cmr = plus.camera.getCamera();
+								cmr.captureImage(function(p) {
+									//成功
+									plus.io.resolveLocalFileSystemURL(p, function(entry) {
+										update_img(entry.toLocalURL());
+									}, function(e) {
+										console.log("读取拍照文件错误：" + e.message);
+									});
+
+								}, function(e) {
+									console.log("失败：" + e.message);
+								}, {
+									filename: '_doc/camera/',
+									index: 1
+								}); //  “_doc/camera/“  为保存文件名
+							} else if(index == 2) {
+								//相册
+
+								plus.gallery.pick(function(path) {
+									img.src = path
+									update_img(path);
+
+								}, function(e) {
+									console.log("取消选择图片");
+
+								}, {
+									filter: "image"
+								});
+							}
+
+						});
+
+				});
+
+			});
+
+			//上传图片
+			function update_img(p) {
+				var server = login_url + "/upload_super.php";
+						alert(p);
+				//初始上传地址  
+					
+				var files = []; //图片存放的数组 可以上传一个，或者多个图片 
+
+				//又初始化了一下文件数组 为了支持我的单个上传,如果你要一次上传多个，就不要在写这一行了
+				//注意 
+				files = [];
+				var n = p.substr(p.lastIndexOf('/') + 1);
+				files.push({
+					name: "uploadkey",
+					path: p
+				});
+
+				if(files.length <= 0) {
+					plus.nativeUI.alert("没有添加上传文件！");
+					return;
+				}
+				//原生的转圈等待框
+				var wt = plus.nativeUI.showWaiting();
+					console.log(server);
+				var task = plus.uploader.createUpload(server, {
+						method: "POST"
+					},
+					function(t, status) { //上传完成
+
+						if(status == 200) {
+
+							//资源
+							var responseText = t.responseText;
+
+							//转换成json
+							var json = eval('(' + responseText + ')');
+
+							//上传文件的信息
+							var files = json.files;
+
+							//							mui.toast('上传成功');
+							//上传成功以后的保存路径
+							img_url = files.uploadkey.url;
+							//			 				alert(img_url);
+							//							img.src = 'http://182.254.155.100/wangzhan/WEB/' + img_url;
+							//							//ajax 写入数据库
+							//                         ca.prompt('上传成功！');   
+							//关闭转圈等待框
+							wt.close();
+						} else {
+							console.log("上传失败：" + status);
+							//关闭原生的转圈等待框
+							wt.close();
+						}
+					});
+
+				task.addData("client", "");
+				task.addData("uid", getUid());
+				for(var i = 0; i < files.length; i++) {
+					var f = files[i];
+					task.addFile(f.path, {
+						key: f.name
+					});
+				}
+				task.start();
+			}
+
+			// 产生一个随机数
+			function getUid() {
+				return Math.floor(Math.random() * 100000000 + 10000000).toString();
+			}
+
+			cell[3].addEventListener('click', function() {
+				mui.plusReady(function() {
+
+					var btnArray = [{
+						title: "男"
+					}, {
+						title: "女"
+					}]; //选择按钮  1 2 3
+					plus.nativeUI.actionSheet({
+							title: "请选择", 
+							cancel: "取消", // 0
+							buttons: btnArray
+						},
+						function(e) {
+							var index = e.index; //  
+							if(index != 0) {
+								input[2].value = btnArray[index - 1].title;
+							}
+						});
+				});
+			});
+			//城市选择  
+			
+			//				alert('1'); 
+		(function($, doc) {
+				$.init();
+				$.ready(function() {
+				
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton = doc.getElementById('showCityPicker3');
+					
+					var cityResult3 = doc.getElementById('cityResult3');
+					showCityPickerButton.addEventListener('click',function() {
+						
+						cityPicker3.show(function(items) {
+							cityResult3.innerText = "你选择的城市是:" + (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					});
+				});
+			})(mui, document);
+					
+		
+
+			document.getElementById("confirmBtn").addEventListener('click', function() {
+				var btnArray = ['否', '是'];
+
+				mui.confirm('是否确认保存？', '我的信息', btnArray, function(e) {
+					if(e.index == 1) {
+
+						$.ajax({ //上传修改的信息
+							type: "get",
+							url: request_url + "Add/admin",
+							data: {
+								phone_data: phone,
+								imgurl_data: img_url,
+								name1_data: input[1].value,
+								sex_data: input[2].value,
+								ciry_data: input[3].value
+
+							},
+							async: true,
+							success: function(data) {
+
+								if(data == 1) {
+									console.log("修改成功");
+									localStorage.setItem('user', cell[2].value);
+									mui.back()
+									//									 mui.openWindow({  
+									//										url:'index.html' ,   
+									//										id:'index',        
+									//									});   
+								} else {
+									console.log("修改失败，请重试");
+								}
+							}
+						});
+
+					} else {
+						//						info.innerText = 'MUI没有得到你的认可，继续加油'
+					}
+				})
+			});
+		</script>
+	</body>
+
+</html>

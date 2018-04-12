@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript">
 			localStorage.setItem('request_url', 'http://101.200.58.92/paotui/index.php/');
+				localStorage.setItem('login_url',"http://101.200.58.92/paotui/WEB"); 
 			var ws = null,
 				wc = null;
 			// 扩展API加载完毕，现在可以正常调用扩展API 
@@ -109,7 +110,7 @@
 	</head>
 
 	<body>
-		<div class="ZBindex-content" id='1'>
+	
 			<header class="mui-bar mui-bar-nav " style="background: linear-gradient(to right, #FF905C , #FFC060); !important;">
 				<a class="mui-icon mui-icon-bars mui-pull-left" style="color: white;" onclick="showSide()"></a>
 				<!--侧滑地图-->
@@ -121,15 +122,18 @@
 					</div>
 				</h1>
 			</header>
-			<div class="mui-slider">
-				<!--选项卡标题区-->
+			<div class="mui-slider" id="1">
+				<!--选项卡标题区--> 
+				<div class="top">
 				<div id='ZBindex-top' class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ZB-top">
 					<a class="mui-control-item" href="#item1">首页</a>
 					<a class="mui-control-item" href="#item2">抢单</a>
 					<a class="mui-control-item" href="#item3">待完成(0)</a>
 				</div>
+				
 				<div class="mui-slider-progress-bar mui-col-xs-4"></div>
-				<div class="mui-slider-group">
+				</div>
+				<div class="mui-slider-group " style="top:45px;">
 					<!--第一个选项卡内容区-->
 					<div id="item1" class="mui-slider-item mui-control-content mui-active" style="border: none;">
 						<div class="personage">
@@ -284,7 +288,84 @@
 								</div>
 								<button>抢单</button>
 							</div>
+	<div class="ZBindex-rob-content">
+								<div class="ZBindex-rob-dingd">
+									<div class="tongcheng">
+										同城
 
+									</div>
+									<div class="rob-dingd-top">
+										<div class="rob-dingd-top-left">
+											22元
+										</div>
+										<div class="rob-dingd-top-rigth">
+											<div class="right-text">
+												已在线支付冻结1元<img src="images/question.png">
+											</div>
+										</div>
+										<div class="rob-dz">
+											<div class="rob-dz-w">
+												我
+											</div>
+											<div class="rob-dz-s">
+												..............
+											</div>
+											<div class="rob-dz-a">
+												直线距离3.14公里
+											</div>
+											<div class="rob-dz-s">
+												..............
+											</div>
+											<div class="rob-dz-w">
+												寄
+											</div>
+											<div class="rob-dz-s">
+												..............
+											</div>
+											<div class="rob-dz-a">
+												骑行距离8.34公里
+											</div>
+											<div class="rob-dz-s">
+												..............
+											</div>
+											<div class="rob-dz-w">
+												收
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ZBindex-rob-dingd-bottom">
+									<div class="dingd-bottom-top">
+										<div class="dingd-bottom-top-l">
+											<div class="dingd-bottom-top-l-set">
+												<div class="rob-dz-w bottom-top-l">
+													收
+												</div>
+												富云花都
+											</div>
+											<div class="dingd-bottom-top-l-set">
+												<div class="rob-dz-w bottom-top-l" style="color: #FF6F41;border:1px solid #FF6F41;">
+													寄
+												</div>
+												人民大会堂
+											</div>
+										</div>
+										<div class="dingd-bottom-top-r">
+											<button><span class="mui-icon mui-icon-map">路线</span></button>
+										</div>
+									</div>
+
+									<div class="dingd-bottom-bottom">
+										<div class="bottom-top">
+											所寄物品 餐品 1公斤
+										</div>
+										<div class="bottom-bottom">
+											备注
+										</div>
+									</div>
+								</div>
+								<button>抢单</button>
+							</div>
 						</div>
 					</div>
 					<!--第三个选项卡内容区，页面加载时为空-->
@@ -318,7 +399,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+		
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script src="js/mui.zoom.js"></script>
@@ -335,7 +416,8 @@
 				mui.toast("error:" + e.message);
 			})
 		});
-
+ var heig=document.getElementById('1').height;
+ console.log(heig);
 		function geoInfo(position) {
 
 			var timeflag = position.timestamp; //获取到地理位置信息的时间戳；一个毫秒数；
@@ -387,13 +469,7 @@
 			);
 
 		}
-		var height = document.documentElement.clientHeight;
-		var width = document.documentElement.clientWidth;
-		document.getElementById('1').style.height = height - 45 + 'px';
-		var bottom = document.getElementById('bottom');
-		var bottomheight = bottom.clientHeight;
-		var tops = document.getElementById('ZBindex-top').clientHeight;
-		bottom.style.top = height - bottomheight - tops - 45 + 'px';
+
 
 		var item2Show = false,
 			item3Show = false; //子选项卡是否显示标志

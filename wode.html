@@ -130,6 +130,9 @@
 							success: function(data) {    
 							     json = JSON.parse(data);  
 								 img.src=  login_url + json.imgurl 
+								 console.log(login_url)
+								 console.log(json.imgurl)
+								  console.log(img.src)
 								 name1.innerHTML=json.name 
 								 iid.innerHTML='ID:'+json.id
 								 
@@ -177,7 +180,7 @@
 						id: 'My-points', //需要打开页面的url页面id		
 					});
 			}); 
-			
+			 
 			xinyongguanli.addEventListener('tap',function(){
 				mui.openWindow({
 						url: 'xinyongguanli.html', //需要打开页面的url地址 

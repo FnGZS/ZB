@@ -15,7 +15,9 @@ body{
 }
 .ZB-top{
 	font-size: 12px ;
-	 
+	position: absolute;
+	background: white !important;
+	top:1px;	 
 } 
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active
 {
@@ -26,6 +28,11 @@ body{
 .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-progress-bar
 {
     background-color: #FF6F41 !important;
+}
+.top{
+	position: fixed;
+	top:45px;
+	z-index:999;
 }
 .ZBindex-sy{
 	width: 100%;
