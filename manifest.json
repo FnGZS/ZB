@@ -11,6 +11,7 @@
         "72": "icon.png"
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "launch_path": "zengtianzhifubaozhanghao.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 =======
 <<<<<<< HEAD
@@ -18,6 +19,12 @@
 =======
 >>>>>>> c959585327ebaf5928406c8632aaef9ca786ee0e
 >>>>>>> 7de2d06889b855f27023083164ee4f529f7c12c3
+=======
+
+    "launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+
+
+>>>>>>> master
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
