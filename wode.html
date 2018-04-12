@@ -78,6 +78,14 @@
 		    				<span class="iconfont icon-shuben"></span> 
 		    				骑士学院
 		    			</li>
+		    			<li class="mui-table-view-cell " id="zaixiankefu">
+		    				<span class="iconfont icon-shezhi"></span> 
+		    				 在线客服
+		    			</li>
+		    			<li class="mui-table-view-cell " id="tinngzhixinxi">
+		    				<span class="iconfont icon-shezhi"></span> 
+		    				通知信息
+		    			</li>
 		    			<li class="mui-table-view-cell " id="shezhi">
 		    				<span class="iconfont icon-shezhi"></span> 
 		    				设置
@@ -119,6 +127,8 @@
 		    var name1=document.getElementById('name1') 
 		    var iid=document.getElementById('iid')
 		    var xinyong=document.getElementById('xinyong')
+		    var zaixiankefu=document.getElementById('zaixiankefu')
+		    var tinngzhixinxi=document.getElementById('tinngzhixinxi')
 		    var aaspan=""
 			 $.ajax({      
 							type: "get",         //修改当前页面内容
@@ -197,8 +207,20 @@
 						id: 'shezhi', //需要打开页面的url页面id		
 					});
 			});
+			zaixiankefu.addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'chat.html', //需要打开页面的url地址 
+						id: 'chat', //需要打开页面的url页面id		
+					});
+			});
 			
-		    
+		    tinngzhixinxi.addEventListener('tap',function(){
+				mui.openWindow({
+						url: 'tongzhixiaoxi.html', //需要打开页面的url地址 
+						id: 'tongzhixiaoxi', //需要打开页面的url页面id		
+					});
+			});
+			
 		   
 		   function getUserInfo(){ //放回此页面时刷新内容
 		   	 $.ajax({      
